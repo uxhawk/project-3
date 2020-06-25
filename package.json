@@ -1,0 +1,33 @@
+{
+  "name": "project-3",
+  "version": "1.0.0",
+  "description": "GW Bootcamp Project #3",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint",
+    "start": "node server.js",
+    "lint": "eslint --quiet .",
+    "fix": "eslint --fix .",
+    "watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uxhawk/project-3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uxhawk/project-3/issues"
+  },
+  "homepage": "https://github.com/uxhawk/project-3#readme",
+  "dependencies": {
+    "mongoose": "^5.9.20",
+    "nodemon": "^2.0.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.3.1",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.20.0"
+  }
+}
