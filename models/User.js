@@ -1,1 +1,1 @@
-// mongo db model for user credentials
+// user model, email and password for authentication
