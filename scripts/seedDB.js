@@ -5,12 +5,26 @@ const db = require('../models');
 
 mongoose.connect(
     process.env.MONGODB_URI ||
-  'mongodb://localhost/reactreadinglist',
+  'mongodb://localhost/tileMaster',
 );
 
-db.Book
+const userSeed = [
+  {
+    userName: "david",
+    password: "12345",
+    financialTransactions: [
+      {
+          category: 'income',
+          amount: 100,
+          date: new Date(Date.now()),
+      }
+  ],
+  },
+]
+
+db.User
     .remove({})
-    .then(() => db.Book.collection.insertMany(bookSeed))
+    .then(() => db.User.collection.insertMany(userSeed))
     .then((data) => {
       console.log(data.result.n + ' records inserted!');
       process.exit(0);
