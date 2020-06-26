@@ -74,7 +74,7 @@ const StoreProvider = ({ value = [], ...props }) => {
 
     ],
     autoFillSymbols: [],
-    user: {},
+    user: [],
     userFinancials: [],
     currentStockSearch: {
       name: '',
