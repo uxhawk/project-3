@@ -1,7 +1,8 @@
-const router = require("express").Router();
-const userRoutes = require("./user");
+/* eslint-disable new-cap */
+const router = require('express').Router();
+const userRoutes = require('./user');
 
 // Book routes
-router.use("/user", userRoutes);
+router.use('/user', userRoutes);
 
 module.exports = router;
