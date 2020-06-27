@@ -17,12 +17,18 @@ export default {
   // saveBook: function(bookData) {
   //   return axios.post("/api/books", bookData);
   // }
-  // getGoogleUser: function() {
-  //   console.log('axios function');
-  //   return axios.get('/auth/google');
-  // }
-    // Gets the user by the email in the login form
+
+  // Gets the user by the email in the login form
   getUserByEmail: function(email) {
     return axios.get('/api/user/' + email);
   },
+  // create a new record for user credentials in db
+  signupUser: function(email, password) {
+    return axios.post('api/auth/signup', 
+    {
+      email: email,
+      password: password,
+    }
+    );
+  }
 };

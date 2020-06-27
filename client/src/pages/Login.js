@@ -6,12 +6,17 @@ const Login = () => {
     const passwordRef = useRef();
     
     function handleLoginBtnClick(event) {
+        // prevent the default behavior from happening on form submit
         event.preventDefault();
+        
+        // if there is not an email or password,
+        // throw an alert to prevent anything from happening
         if (!emailRef.current.value || !passwordRef.current.value) {
             return alert('Please enter your email and password to sign in.');
         } 
-        checkEmail(emailRef.current.value);
 
+        // if there is data in the fields, run the checkEmail function and clear the input fields
+        checkEmail(emailRef.current.value);
         emailRef.current.value = '';
         passwordRef.current.value = '';
     }
