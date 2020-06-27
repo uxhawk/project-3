@@ -1,9 +1,6 @@
 import React from 'react';
 
-const UserLogin = () => {
-    function handleBtnClick() {
-        console.log('hello');
-    }
+const Login = () => {
 
     return (
         <div className="row">
@@ -22,13 +19,9 @@ const UserLogin = () => {
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
-
-
-
             </div>
-            {/* <a href="/auth/google" className="btn btn-danger" onClick={() => {handleBtnClick()}}>Login With Google</a> */}
         </div>
     );
 };
 
-export default UserLogin;
+export default Login;

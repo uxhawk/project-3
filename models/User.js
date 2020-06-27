@@ -3,13 +3,21 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    userName: String,
-    password: String,
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
     financialTransactions: [
         {
             category: String,
             amount: Number,
-            date: Date
+            date: Date,
+            notes: String
         }
     ],
 });
