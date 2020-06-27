@@ -10,17 +10,17 @@ mongoose.connect(
 
 const userSeed = [
   {
-    userName: "david",
-    password: "12345",
+    email: 'testing@gmail.com',
+    password: '12345',
     financialTransactions: [
       {
-          category: 'income',
-          amount: 100,
-          date: new Date(Date.now()),
-      }
-  ],
+        category: 'income',
+        amount: 100,
+        date: new Date(Date.now()),
+      },
+    ],
   },
-]
+];
 
 db.User
     .remove({})

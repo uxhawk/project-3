@@ -21,6 +21,15 @@ module.exports = {
         .then((dbModel) => res.json(dbModel))
         .catch((err) => res.status(422).json(err));
   },
+  findByEmail: function(req, res) {
+    console.log(req.params.email);
+    db.User
+        .findOne({email: req.params.email}, function(err, obj) {
+          console.log(obj);
+        })
+        .then((dbModel) => res.json(dbModel))
+        .catch((err) => res.status(422).json(err));
+  },
 //   update: function(req, res) {
 //     db.Book
 //         .findOneAndUpdate({_id: req.params.id}, req.body)

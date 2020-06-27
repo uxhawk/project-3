@@ -17,9 +17,12 @@ export default {
   // saveBook: function(bookData) {
   //   return axios.post("/api/books", bookData);
   // }
-
-  getGoogleUser: function() {
-    console.log('axios function');
-    return axios.get('/auth/google');
-  }
+  // getGoogleUser: function() {
+  //   console.log('axios function');
+  //   return axios.get('/auth/google');
+  // }
+    // Gets the user by the email in the login form
+  getUserByEmail: function(email) {
+    return axios.get('/api/user/' + email);
+  },
 };
