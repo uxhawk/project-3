@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 const Goals = () => {
     const [state]= useStoreContext();
 
-    if (state.user.length === 0) {
+    if (state.user === '') {
         return <Redirect to="/login" />; 
     }
     

@@ -22,12 +22,10 @@ module.exports = {
         .catch((err) => res.status(422).json(err));
   },
   findByEmail: function(req, res) {
-    console.log(req.params.email);
     db.User
         .findOne({email: req.params.email}, function(err, obj) {
-          console.log(obj);
         })
-        .then((dbModel) => res.json(dbModel))
+        .then((dbModel) => res.json(dbModel.financialTransactions))
         .catch((err) => res.status(422).json(err));
   },
 //   update: function(req, res) {

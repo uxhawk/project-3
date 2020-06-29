@@ -9,19 +9,16 @@ const passport = require('passport');
 router.post('/signup', (req, res, next) => {
   passport.authenticate('local', function(err, user, info) {
     if (err) {
-      console.log('test1');
       return res.status(400).json({errors: err});
     }
     if (!user) {
-      console.log('test2');
       return res.status(400).json({errors: 'No user found'});
     }
     req.logIn(user, function(err) {
       if (err) {
-        console.log('test3');
         return res.status(400).json({errors: err});
       }
-      return res.status(200).json({success: `logged in ${user.id}`});
+      return res.status(200).json(user.id);
     });
   })(req, res, next);
 });

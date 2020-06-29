@@ -1,7 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import API from '../utils/API';
+import { useStoreContext } from '../utils/GlobalState';
+import { NEW_USER } from '../utils/actions';
+import { Redirect } from 'react-router-dom';
 
 const Signup = () => {
+    const [state, dispatch] = useStoreContext();
     const emailRef = useRef();
     const passwordRef = useRef();
     
@@ -25,11 +29,49 @@ const Signup = () => {
   function signupUser(email, password) {
     API.signupUser(email, password)
       .then(res => 
-        console.log(res.data)
+        dispatch({
+            type: NEW_USER,
+            userID: res.data,
+        }),
       )
       .catch(err => console.log(err));
-  };
+  }
 
+  function redirectAfterSignup() {
+    console.log(state.user);
+    if (state.user !== '') {
+        console.log('ur in bro');
+        return <Redirect to="/" />; 
+    }
+  }
+
+  useEffect(() => {
+    // console.log(state);
+    // if (state.user !== '') {
+    //     return <Redirect to="/dashboard" />; 
+    // }
+    redirectAfterSignup();
+  })
+
+//   const getPrices = (symbol) => {
+//     API.getIndexPrices(symbol)
+//     .then((res) => {
+//         dispatch({
+            
+//             type: UPDATE_PRICE,
+//             index: props.id,
+//             currentPrice: res.data.c
+//         });
+//     })
+//     .catch((err) => console.log(err));
+// }
+// useEffect(() => {
+//     getPrices(props.state.symbol);
+// }, []);
+
+if (state.user !== '') {
+    return <Redirect to="/dashboard" />; 
+}
 
     return (
         <div className="row text-center">
