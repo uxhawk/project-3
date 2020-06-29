@@ -23,9 +23,10 @@ module.exports = {
   },
   findByEmail: function(req, res) {
     db.User
-        .findOne({email: req.params.email}, function(err, obj) {
-        })
-        .then((dbModel) => res.json(dbModel.financialTransactions))
+        .findOne({email: req.params.email},
+            '_id userFinancials', function(err, obj) {
+            })
+        .then((dbModel) => res.json(dbModel))
         .catch((err) => res.status(422).json(err));
   },
 //   update: function(req, res) {

@@ -1,7 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import API from '../utils/API';
+import { useStoreContext } from '../utils/GlobalState';
+import { Redirect } from 'react-router-dom';
+import { LOGIN } from '../utils/actions';
 
 const Login = () => {
+    const [state, dispatch] = useStoreContext();
     const emailRef = useRef();
     const passwordRef = useRef();
     
@@ -25,12 +29,29 @@ const Login = () => {
   function checkEmail(email) {
     API.getUserByEmail(email)
       .then(res => 
-        console.log(res.data)
+        dispatch({
+            type: LOGIN,
+            userID: res.data._id,
+            userFinancials: res.data.userFinancials
+        })
       )
       .catch(err => console.log(err));
   };
 
+  function redirectAfterLogin() {
+    if (state.user !== '') {
+        return <Redirect to="/" />; 
+    }
+  }
 
+  useEffect(() => {
+    redirectAfterLogin();
+  })
+
+
+  if (state.user !== '') {
+    return <Redirect to="/dashboard" />; 
+}
     return (
         <div className="row text-center">
             {/* <h2>Welcome to Tile Master Finances. Sign in to get started.</h2> */}

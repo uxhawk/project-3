@@ -30,5 +30,8 @@ export default {
       password: password,
     }
     );
+  },
+  logout: function() {
+    return axios.get('api/auth/logout')
   }
 };

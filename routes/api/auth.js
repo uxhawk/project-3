@@ -25,6 +25,7 @@ router.post('/signup', (req, res, next) => {
 
 // Matches with "/api/auth/logout"
 router.get('/logout', (req, res) => {
+  console.log('logout route');
   req.logout();
   res.redirect('/login');
 });

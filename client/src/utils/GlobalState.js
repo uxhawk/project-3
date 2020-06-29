@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useContext } from "react";
-import { NEW_USER } from "./actions";
+import { NEW_USER, LOGOUT, LOGIN } from "./actions";
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
@@ -11,6 +11,18 @@ const reducer = (state, action) => {
         ...state,
         user: action.userID
       };
+    case LOGOUT:
+      return {
+        ...state,
+        user: action.user,
+        userFinancials: action.userFinancials,
+      };
+    case LOGIN:
+      return {
+        ...state,
+        user: action.userID,
+        userFinancials: action.userFinancials,
+      }
       default:
         return state;
   }

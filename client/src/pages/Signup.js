@@ -38,18 +38,12 @@ const Signup = () => {
   }
 
   function redirectAfterSignup() {
-    console.log(state.user);
     if (state.user !== '') {
-        console.log('ur in bro');
         return <Redirect to="/" />; 
     }
   }
 
   useEffect(() => {
-    // console.log(state);
-    // if (state.user !== '') {
-    //     return <Redirect to="/dashboard" />; 
-    // }
     redirectAfterSignup();
   })
 
