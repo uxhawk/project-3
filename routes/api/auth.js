@@ -5,8 +5,12 @@ const passport = require('passport');
 // const LocalStrategy = require('passport-local').Strategy;
 
 
-router.get('/get_credentials', (req, res, next) => {
-  return res.status(200).json(req.user.id);
+router.get('/get_credentials', (req, res) => {
+  if (req.user) {
+    res.status(200).json(req.user.id);
+  } else {
+    res.status(401).end();
+  }
 });
 
 // Matches with "/api/auth/signup"

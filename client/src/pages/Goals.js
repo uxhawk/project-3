@@ -1,32 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStoreContext } from '../utils/GlobalState';
 import { Redirect } from 'react-router-dom';
 import API from '../utils/API';
-import { LOGIN, LOADING } from '../utils/actions';
+import { LOGIN } from '../utils/actions';
 
 const Goals = () => {
+    const [loading, setLoading] = useState(true);
     const [state, dispatch] = useStoreContext();
 
     useEffect(() => {
-        dispatch({
-            type: LOADING,
-        });
-        API.get_credentials().then(res => {
-            if (res.data) {
+        if (state.user) {
+            setLoading(false);
+        } else {
+            API.get_credentials().then(res => {
                 dispatch({
                     type: LOGIN,
                     userID: res.data
                 });
                 console.log(`User ID: ${res.data}`);
-            } else {
-                return <Redirect to="/login" />; 
-            }
-        })
+            }).catch(err => {
+                console.log(err);
+            }).finally(_ => {
+                setLoading(false);
+            });
+        }
     }, []);
 
     return (
         <div>
-            {state.loading ? <div>Loading... Please wait.</div> : <div>goals page</div>}
+            {loading ?
+                <div>Loading... Please wait.</div>
+                :
+            <div>{state.user ? <div>goals page</div> : <Redirect to="/login" />}</div>
+            }
         </div>
     );
 };

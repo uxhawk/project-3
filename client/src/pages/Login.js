@@ -4,10 +4,6 @@ import { useStoreContext } from '../utils/GlobalState';
 import { Redirect } from 'react-router-dom';
 import { LOGIN } from '../utils/actions';
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 const Login = () => {
     const [state, dispatch] = useStoreContext();
     const emailRef = useRef();
@@ -32,13 +28,11 @@ const Login = () => {
       // Loads all books and sets them to books
   function checkEmail(email, password) {
     API.register_login(email, password)
-      .then(async res => {
-        dispatch({
+      .then(async res => dispatch({
             type: LOGIN,
             userID: res.data._id,
             userFinancials: res.data.userFinancials
-        });
-        await sleep(2000);}
+        })
       )
       .catch(err => console.log(err));
   };
