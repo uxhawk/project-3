@@ -19,12 +19,12 @@ export default {
   // }
 
   // Gets the user by the email in the login form
-  getUserByEmail: function(email) {
-    return axios.get('/api/user/' + email);
-  },
+  // getUserByEmail: function(email) {
+  //   return axios.get('/api/user/' + email);
+  // },
   // create a new record for user credentials in db
-  signupUser: function(email, password) {
-    return axios.post('api/auth/signup', 
+  register_login: function(email, password) {
+    return axios.post('api/auth/register_login', 
     {
       email: email,
       password: password,

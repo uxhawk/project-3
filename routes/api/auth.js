@@ -6,7 +6,7 @@ const passport = require('passport');
 
 
 // Matches with "/api/auth/signup"
-router.post('/signup', (req, res, next) => {
+router.post('/register_login', (req, res, next) => {
   passport.authenticate('local', function(err, user, info) {
     if (err) {
       return res.status(400).json({errors: err});
@@ -18,7 +18,11 @@ router.post('/signup', (req, res, next) => {
       if (err) {
         return res.status(400).json({errors: err});
       }
-      return res.status(200).json(user.id);
+      const userDetails = {
+        _id: user._id,
+        userFinancials: user.userFinancials
+      }
+      return res.status(200).json(userDetails);
     });
   })(req, res, next);
 });
@@ -32,9 +36,9 @@ router.get('/logout', (req, res) => {
 
 
 // Matches with "/api/auth/login"
-router
-    .route('/login')
-    .get(userFinancials.findByEmail);
+// router
+//     .route('/login')
+//     .get(userFinancials.findByEmail);
 
 
 module.exports = router;

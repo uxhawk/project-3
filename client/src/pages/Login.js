@@ -4,6 +4,10 @@ import { useStoreContext } from '../utils/GlobalState';
 import { Redirect } from 'react-router-dom';
 import { LOGIN } from '../utils/actions';
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 const Login = () => {
     const [state, dispatch] = useStoreContext();
     const emailRef = useRef();
@@ -20,20 +24,21 @@ const Login = () => {
         } 
 
         // if there is data in the fields, run the checkEmail function and clear the input fields
-        checkEmail(emailRef.current.value);
+        checkEmail(emailRef.current.value, passwordRef.current.value);
         emailRef.current.value = '';
         passwordRef.current.value = '';
     }
 
       // Loads all books and sets them to books
-  function checkEmail(email) {
-    API.getUserByEmail(email)
-      .then(res => 
+  function checkEmail(email, password) {
+    API.register_login(email, password)
+      .then(async res => {
         dispatch({
             type: LOGIN,
             userID: res.data._id,
             userFinancials: res.data.userFinancials
-        })
+        });
+        await sleep(2000);}
       )
       .catch(err => console.log(err));
   };
@@ -45,6 +50,7 @@ const Login = () => {
   }
 
   useEffect(() => {
+    console.log(state.user);
     redirectAfterLogin();
   })
 

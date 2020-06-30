@@ -25,13 +25,14 @@ const Signup = () => {
         passwordRef.current.value = '';
     }
 
+    
       // function to send the credentials to the backend to register
   function signupUser(email, password) {
-    API.signupUser(email, password)
+    API.register_login(email, password)
       .then(res => 
         dispatch({
             type: NEW_USER,
-            userID: res.data,
+            userID: res.data._id,
         }),
       )
       .catch(err => console.log(err));

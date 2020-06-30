@@ -18,7 +18,6 @@ function App() {
         <StoreProvider>
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Signup} />
-          {/* <Route exact path='*' component={ProtectedRoutes} /> */}
           <Route exact path={['/dashboard', '/']} component={Dashboard} />
           <Route exact path='/stock-market' component={StockMarket} />
           <Route exact path='/goals' component={Goals} />
