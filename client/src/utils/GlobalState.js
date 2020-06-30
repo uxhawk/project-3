@@ -14,7 +14,7 @@ const reducer = (state, action) => {
     case LOGOUT:
       return {
         ...state,
-        user: action.user,
+        user: action.userID,
         userFinancials: action.userFinancials,
       };
     case LOGIN:

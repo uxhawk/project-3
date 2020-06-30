@@ -1,33 +1,65 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStoreContext } from '../utils/GlobalState';
 import { Redirect, useHistory } from 'react-router-dom';
+import API from '../utils/API';
+import { LOGIN } from '../utils/actions';
 
 const StockMarket = () => {
-    const [state]= useStoreContext();
+    const [loading, setLoading] = useState(true);
+    const [state, dispatch] = useStoreContext();
     let history = useHistory();
-
-    useEffect(() => {
-        console.log(state.user);
-    })
 
     function handleNavClick(event) {
         const destination = event.target.getAttribute('nav-value');
-        console.log(destination);
         history.push(`/${destination}`);
-      }
-
-    if (state.user === '') {
-        return <Redirect to="/login" />; 
     }
+
+    useEffect(() => {
+        if (state.user) {
+            setLoading(false);
+        } else {
+            API.get_credentials().then(res => {
+                dispatch({
+                    type: LOGIN,
+                    userID: res.data
+                });
+                console.log(`User ID: ${res.data}`);
+            }).catch(err => {
+                console.log(err);
+            }).finally(_ => {
+                setLoading(false);
+            });
+        }
+    }, []);
 
     return (
         <div>
-            Stock market
-            <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
-            <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
-            <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Add Transactions</button>
+            {loading ? <div>Loading... Please wait.</div> :
+            <div>
+                {
+                state.user ? 
+                    <div>
+                        Stock market
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
+                    </div>  : 
+                    <Redirect to="/login" />
+                }
+            </div>
+            }
         </div>
     );
 };
 
+
+
+
 export default StockMarket;
+
+
+
+
+
+

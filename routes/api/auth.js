@@ -37,16 +37,8 @@ router.post('/register_login', (req, res, next) => {
 
 // Matches with "/api/auth/logout"
 router.get('/logout', (req, res) => {
-  console.log('logout route');
   req.logout();
-  res.redirect('/login');
+  res.send('you logged out');
 });
-
-
-// Matches with "/api/auth/login"
-// router
-//     .route('/login')
-//     .get(userFinancials.findByEmail);
-
 
 module.exports = router;
