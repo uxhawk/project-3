@@ -13,16 +13,16 @@ function App() {
   return (
     <Router>
       <div>
+      <StoreProvider>
         <Nav />
         <Switch>
-        <StoreProvider>
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Signup} />
           <Route exact path={['/dashboard', '/']} component={Dashboard} />
           <Route exact path='/stock-market' component={StockMarket} />
           <Route exact path='/goals' component={Goals} />
-        </StoreProvider>
         </Switch>
+        </StoreProvider>
       </div>
     </Router>
   );

@@ -5,6 +5,10 @@ const passport = require('passport');
 // const LocalStrategy = require('passport-local').Strategy;
 
 
+router.get('/get_credentials', (req, res, next) => {
+  return res.status(200).json(req.user.id);
+});
+
 // Matches with "/api/auth/signup"
 router.post('/register_login', (req, res, next) => {
   passport.authenticate('local', function(err, user, info) {

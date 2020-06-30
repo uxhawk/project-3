@@ -23,6 +23,10 @@ export default {
   //   return axios.get('/api/user/' + email);
   // },
   // create a new record for user credentials in db
+  get_credentials: () => {
+    return axios.get('api/auth/get_credentials');
+  },
+
   register_login: function(email, password) {
     return axios.post('api/auth/register_login', 
     {
