@@ -4,7 +4,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import API from '../utils/API';
 import { LOGIN } from '../utils/actions';
 
-const Goals = () => {
+const Transaction = () => {
     const [loading, setLoading] = useState(true);
     const [state, dispatch] = useStoreContext();
     let history = useHistory();
@@ -39,7 +39,7 @@ const Goals = () => {
                 {
                 state.user ? 
                     <div>
-                        Goals
+                        Transaction
                         <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
                         <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
                         <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
@@ -53,4 +53,10 @@ const Goals = () => {
     );
 };
 
-export default Goals;
+export default Transaction;
+
+
+
+
+
+

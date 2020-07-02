@@ -1,14 +1,34 @@
-require('dotenv').config();
+// require('dotenv').config();
 const express = require('express');
-
+const session = require('express-session');
+// const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
+
+const passport = require('./config/passport');
 const routes = require('./routes');
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
+// express session
+// app.use(
+//     session({
+//       secret: 'replace with environmental var',
+//       resave: false,
+//       saveUninitialized: false,
+//       store: new MongoStore({mongooseConnection: mongoose.connection}),
+//     }),
+// );
+app.use(session({secret: 'keyboard cat',
+  resave: true, saveUninitialized: true}));
+
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {

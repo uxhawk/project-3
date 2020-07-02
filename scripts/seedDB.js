@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const db = require('../models');
 
-// This file empties the Books collection and inserts the books below
+// This file empties the users collection and inserts the users below
 
 mongoose.connect(
     process.env.MONGODB_URI ||
@@ -10,17 +10,17 @@ mongoose.connect(
 
 const userSeed = [
   {
-    userName: "david",
-    password: "12345",
+    email: 'testing@gmail.com',
+    password: '12345',
     financialTransactions: [
       {
-          category: 'income',
-          amount: 100,
-          date: new Date(Date.now()),
-      }
-  ],
+        category: 'income',
+        amount: 100,
+        date: new Date(Date.now()),
+      },
+    ],
   },
-]
+];
 
 db.User
     .remove({})

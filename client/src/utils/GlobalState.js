@@ -1,53 +1,31 @@
 import React, { createContext, useReducer, useContext } from "react";
-import { } from "./actions";
+import { NEW_USER, LOGOUT, LOGIN } from "./actions";
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
 
 const reducer = (state, action) => {
-//   switch (action.type) {
-//     case ADD_SYMBOLS:
-//       return {
-//         ...state,
-//         autoFillSymbols: [...action.symbols, ...state.autoFillSymbols]
-//       };
-
-//       // this really should be update index price
-//       case UPDATE_PRICE:
-//         return update(state, {
-//           marketList: {
-//             [action.index]: {
-//               lastUpdate: {
-//                 $set: new Date(Date.now()).toLocaleString(),
-//               },
-//               currentPrice: {
-//                 $set: action.currentPrice,
-//               }
-//             }
-//           }
-//         });
-      
-//       case GET_STOCK_PRICE: 
-//         return update(state, {
-//           currentSearch: {
-//             name: {
-//               $set: action.company,
-//             },
-//             currentPrice: {
-//               $set: action.price,
-//             },
-//             symbol: {
-//               $set: action.symbol
-//             },
-//             lastUpdate: {
-//               $set: action.lastUpdate,
-//             },
-//           }
-//         })
-
-//       default:
-//         return state;
-//   }
+  switch (action.type) {
+    case NEW_USER:
+      return {
+        ...state,
+        user: action.userID,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        user: action.userID,
+        userFinancials: action.userFinancials,
+      };
+    case LOGIN:
+      return {
+        ...state,
+        user: action.userID,
+        userFinancials: action.userFinancials,
+      }
+    default:
+      return state;
+  }
 };
 
 const StoreProvider = ({ value = [], ...props }) => {
@@ -74,7 +52,7 @@ const StoreProvider = ({ value = [], ...props }) => {
 
     ],
     autoFillSymbols: [],
-    user: [],
+    user: '',
     userFinancials: [],
     currentStockSearch: {
       name: '',
