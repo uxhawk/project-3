@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title></title>
+
+	<style>
+		html{
+			height: 100%;
+			width: 100%;
+			background-image:url('images/bgl.jpg')
+		}
+		.title{
+		  text-align: center;
+		  margin-bottom: 20px;
+		  margin-top: 30px; 
+		  font-size: 20px;
+		  font-weight: 600;
+		}
+		td{
+		  padding: 20px 0;
+		}
+		tr:hover{
+		  cursor: pointer;
+		  background-color: #eee;
+		}
+		
+	</style>
+</head>
+<body>
+<input type="button" onclick="javascript:location='login.html'" value="back">
+	<table border="1" bordercolor="#999"  cellspacing="0" align="center">
+            <caption class="title">Show Data</caption>
+			<caption class="title"><a href="javascript:;" onclick="clearMes();">Delete All</a></caption>
+            <thead>
+                <tr height="50px" >
+                    <th width="70px">Amount</th>
+                    <th>Category</th>
+                    <th width="90px">Date</th>
+                    <th width="120px">Details</th>
+                </tr>
+            </thead>
+            <tbody id="tbHtml">
+                
+                
+            </tbody>
+
+        </table>
+
+
+
+
+</body>
+<script>
+
+var array=JSON.parse(localStorage.getItem('Array'));
+
+window.onload=function(){
+	
+		if(array!=null){
+		console.log(array);
+			arrtoShow(array);
+		}
+}
+function arrtoShow(arrs){
+document.getElementById("tbHtml").innerHTML="";
+	for(var i=0;i<arrs.length;i++){
+		var innHtml="";
+		
+		var arrStr=arrs[i];
+		var arr=arrStr.split("-");
+		
+			innHtml+='<tr align="center">';
+			innHtml+=' <td>';
+			innHtml+=arr[0];
+			innHtml+='</td>';
+			innHtml+=' <td>';
+			innHtml+=arr[1];
+			innHtml+='</td>';
+			innHtml+=' <td>';
+			innHtml+=arr[2];
+			innHtml+='</td>';
+			innHtml+=' <td>';
+			innHtml+=arr[3];
+			innHtml+='</td>';
+			innHtml+=' </tr>';
+			
+		document.getElementById("tbHtml").innerHTML+=innHtml;
+	
+	}
+	
+	
+}function clearMes(){
+	localStorage.clear();
+	arrtoShow("");
+}
+</script>
+</html>

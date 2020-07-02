@@ -1,0 +1,27 @@
+
+		input{
+			height: 40px;
+			line-height: 40px;
+			width: 22%;
+			margin-left: 39%;
+			border: 1px solid #fff;
+			border-radius: 4px;
+			margin-bottom: 20px;
+			padding-left: 4px;
+			box-sizing: border-box;
+			}
+			form{ 
+				padding: 50px;
+				
+				margin-top: 100px;
+				}
+				form p{
+					text-align: center;
+					width: 100%;
+					font-size: 38px;
+					color: #fff;
+					font-family:"kaiti"
+					}
+					#sbbutton{
+						background-color: #fff;
+					}

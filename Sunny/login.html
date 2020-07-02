@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title></title>
+
+	<style>
+		html{
+			height: 100%;
+			width: 100%;
+			background-image:url('images/bgl.jpg')
+		}
+		input{
+			height: 40px;
+			line-height: 40px;
+			width: 55%;
+			
+			border: 1px solid #fff;
+			border-radius: 4px;
+			margin-bottom: 20px;
+			padding-left: 4px;
+			box-sizing: border-box;
+			}
+			
+		select{
+			height: 40px;
+			line-height: 40px;
+			width: 55%;
+			margin-left:-8px;
+			border: 1px solid #fff;
+			border-radius: 4px;
+			margin-bottom: 20px;
+			padding-left: 1px;
+			box-sizing: border-box;
+		}			
+			.inputDiv{
+				height: 40px;
+				line-height: 40px;
+				width: 32%;
+				margin-left: 36%;
+				/*border: 1px solid #fff;*/
+				border-radius: 4px;
+				margin-bottom: 20px;
+				padding-left: 4px;
+				color:#fff;
+				font-size:20px;
+			
+			}
+			.inputDiv span{
+				width:30%;
+				text-align:left;
+				display:inline-block;
+			}
+			form{ 
+				padding: 50px;
+				
+				margin-top: 50px;
+			}
+			form p{
+				text-align: center;
+				width: 100%;
+				font-size: 38px;
+				color: #fff;
+				font-family:"kaiti"
+			}
+			#sbbutton{
+				background-color: #fff;
+				margin-left: 50%;
+				width:30%;
+			}
+	</style>
+</head>
+<body>
+
+	
+
+
+<form method="get"  action="" >
+	<p>Welcome to financial planning</p>
+	<div class="inputDiv"> 
+		<span>Amount:</span><input  id="amount" type="text" placeholder=""/>
+	</div>
+	<div class="inputDiv"> 
+		<span>Category:</span>
+		<select id="category">
+			<option value="income">Income</option>
+			<option value="bar/restaurant">Bar/Restaurant</option>
+			<option value="travel">Travel</option>
+			<option value="travel">Grocery Store </option>
+			<option value="travel">Bill </option>
+		</select>
+	</div>
+	<div class="inputDiv"> 
+		<span>Date:</span><input  id="date" type="text" placeholder=""/>
+	</div>
+	<div class="inputDiv"> 
+		<span>Details:</span><input  id="details" type="text" placeholder=""/>
+	</div>
+	<div class="inputDiv"> 
+		<input type="button"  value="Submit" onclick="usename_error();" id="sbbutton" />
+		<input type="button"  value="Home page" onclick="javascript:location='index.html'" id="sbbutton" />
+	</div>
+</form>
+		 
+
+
+	</div>
+
+</body>
+<script>
+
+function usename_error(){
+debugger;
+ var amount=document.getElementById("amount").value;
+ var category=document.getElementById("category").value;
+ var dates=document.getElementById("date").value;
+ var details=document.getElementById("details").value;
+   if(amount==""){
+      alert("amount cannot be empty");
+    
+   }
+   if(category==""){
+      alert("category cannot be empty");
+    
+   }
+   if(amount==""){
+      alert("amount cannot be empty");
+    
+   }
+   if(dates==""){
+      alert("date cannot be empty");
+    
+   }
+
+
+	var array=JSON.parse(localStorage.getItem('Array'));
+	if(array==null){
+		array=new Array();
+	}
+	array.push(amount+"-"+category+"-"+dates+"-"+details);
+	 localStorage.setItem('Array',JSON.stringify(array));
+	location='index.html';
+
+  }
+
+</script>
+</html>
