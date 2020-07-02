@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import StockMarket from "./pages/StockMarket";
 import Goals from "./pages/Goals";
 import Transaction from "./pages/Transaction";
+import './App.css';
 
 function App() {
   return (
