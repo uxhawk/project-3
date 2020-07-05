@@ -12,9 +12,9 @@ const CurrentSearch = (props) => {
                     <h5 className="mb-0 pb-0">{props.currentSearch.symbol}</h5>
                     <p className="small p-0 m-0">{props.currentSearch.name}</p>
                 </div>
-                <div>
+                {/* <div>
                     <button type="button" className="btn btn-primary btn-sm" onClick={() => {handleWatchClick()}}><i className="fas fa-plus-circle pr-2" ></i>Watch</button>
-                </div>
+                </div> */}
             </div>
             <div className="card-body">
                 <h5 className="mb-0 pb-0">${props.currentSearch.currentPrice}</h5>

@@ -74,8 +74,8 @@ const Search = () => {
                     <div className="input-group mb-3">
                         <input list="availableStocks" type="text" className="form-control" id="stockSearch" placeholder="Search for stock prices" />
                         <div className="input-group-append">
-                            <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={() => {clearStockSearch()}}>Clear</button>
-                            <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={() => {getPrice()}}>Search Stocks</button>
+                            <button className="btn btn-info" type="button" id="button-addon2" onClick={() => {clearStockSearch()}}><i class="far fa-times-circle"></i></button>
+                            <button className="btn btn-primary" type="button" id="button-addon3" onClick={() => {getPrice()}}>Search Stocks</button>
                         </div>
                     </div>
                     <DataList symbols={state.autoFillSymbols}/>
@@ -93,3 +93,27 @@ const Search = () => {
 };
 
 export default Search;
+
+// return (
+//     <div>
+//        <div className="row pb-4">
+//             <div className="col-lg-8 col-md-10 offset-lg-2 offset-md-1">
+//                 <div className="input-group mb-3">
+//                     <input list="availableStocks" type="text" className="form-control" id="stockSearch" placeholder="Search for stock prices" />
+//                     <div className="input-group-append">
+//                         <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={() => {clearStockSearch()}}>Clear</button>
+//                         <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={() => {getPrice()}}>Search Stocks</button>
+//                     </div>
+//                 </div>
+//                 <DataList symbols={state.autoFillSymbols}/>
+//             </div>
+//         </div>
+//     <div className="row">
+//         <div className="col-md-4 offset-md-4">
+//         {
+//             state.currentSearch.name === '' ? "" : <CurrentSearch currentSearch={state.currentSearch}/>
+//         }
+//         </div>
+//     </div>
+//     </div>
+// );

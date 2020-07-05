@@ -4,7 +4,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import API from '../utils/API';
 import { LOGIN } from '../utils/actions';
 import MarketOverview from '../components/StockMarket/MarketOverview';
-// import Search from '../components/StockMarket/Search';
+import Search from '../components/StockMarket/Search';
 
 const StockMarket = () => {
     const [loading, setLoading] = useState(true);
@@ -43,7 +43,7 @@ const StockMarket = () => {
                     <div>
                         Stock market
                         <MarketOverview />
-                        {/* <Search /> */}
+                        <Search />
                     </div>  : 
                     <Redirect to="/login" />
                 }

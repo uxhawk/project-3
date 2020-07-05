@@ -86,8 +86,13 @@ const StoreProvider = ({ value = [], ...props }) => {
         currentPrice: 0,
         lastUpdate: new Date(Date.now()).toLocaleString(),
       },
-
     ],
+    currentSearch: {
+      name: '',
+      currentPrice: 0,
+      symbol: '',
+      lastUpdate: new Date(Date.now()).toLocaleString(),
+    },
     autoFillSymbols: [],
     user: '',
     userFinancials: [],
