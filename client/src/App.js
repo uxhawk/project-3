@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Nav from "./components/Nav";
 import { StoreProvider } from "./utils/GlobalState";
 import Dashboard from "./pages/Dashboard";
 import StockMarket from "./pages/StockMarket";
@@ -15,7 +14,6 @@ function App() {
     <Router>
       <div>
       <StoreProvider>
-        <Nav />
         <Switch>
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Signup} />

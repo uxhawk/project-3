@@ -61,6 +61,10 @@ const Dashboard = () => {
               state.user ? 
                   <div>
                       Dashboard
+                      <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
                       <div className="tiles">
                           <div className="item color">item 1</div>
                           <div className="item">item 2</div>
