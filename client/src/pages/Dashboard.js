@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import API from '../utils/API';
 import { LOGIN, LOGOUT } from '../utils/actions';
+import '../App.css';
 
 
 const Dashboard = () => {
@@ -28,7 +29,14 @@ const Dashboard = () => {
   }
     
     useEffect(() => {
-      if (state.user) {
+      const script = document.createElement("script");
+
+      script.src = "./js/multiple.js";
+      script.async = true;
+  
+      document.body.appendChild(script);
+      
+      if (state.user) {        
           setLoading(false);
       } else {
           API.get_credentials().then(res => {
@@ -54,10 +62,28 @@ const Dashboard = () => {
                   <div>
                       Dashboard
                       <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
+                      <div className="tiles">
+                          <div className="item color">item 1</div>
+                          <div className="item">item 2</div>
+                          <div className="item">item 3</div>
+                          <div className="item">item 4</div>
+                          <div className="item">item 5</div>
+                          <div className="item">item 6</div>
+                          <div className="item">item 7</div>
+                          <div className="item">item 8</div>
+                          <div className="item">item 9</div>
+                          <div className="item-tall">item 10</div>
+                          <div className="item">item 11</div>
+                          <div className="item">item 12</div>  
+                      </div>
+                      {/* <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
                       <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
                       <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
                       <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
-                      <button className="btn btn-info" onClick={() => {handleSignOut()}} nav-value="dashboard">Sign Out</button>
+                      <button className="btn btn-info" onClick={() => {handleSignOut()}} nav-value="dashboard">Sign Out</button> */}
                   </div>  : 
                   <Redirect to="/login" />
               }

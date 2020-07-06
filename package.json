@@ -36,7 +36,10 @@
     "express-session": "^1.17.1",
     "if-env": "^1.0.4",
     "mongoose": "^5.9.20",
+    "multiple.js": "0.0.1",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "react-addons-update": "^15.6.2",
+    "react-autocomplete": "^1.8.1"
   }
 }
