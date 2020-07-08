@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useStoreContext } from '../utils/GlobalState';
 import { Redirect, useHistory } from 'react-router-dom';
 import API from '../utils/API';
-import { LOGIN } from '../utils/actions';
+import { LOGIN, ADD_TRANSACTION, GET_TRANSACTIONS } from '../utils/actions';
 
 const Transaction = () => {
     const [loading, setLoading] = useState(true);
@@ -23,9 +23,14 @@ const Transaction = () => {
             amount: amountRef.current.value,
             date: dateRef.current.value,
             category: categoryRef.current.value,
-            details: detailsRef.current.value
+            details: detailsRef.current.value,
+            userId: state.user,
         }
-        console.log(transaction);
+        API.submitTransaction(state.user, transaction)
+            .then(() => {
+                getTransactions();
+            })
+            .catch((err) => console.log(err));
     }
 
 
@@ -34,9 +39,23 @@ const Transaction = () => {
         history.push(`/${destination}`);
     }
 
+    function getTransactions() {
+        API.getTransactions(state.user)
+            .then((res) => {
+                dispatch({
+                    type: GET_TRANSACTIONS,
+                    userFinancials: res.data[0].userFinancials,
+                });
+            })
+            .catch((err) => console.log(err));
+            console.log(state.userFinancials);
+    }
+
     useEffect(() => {
+        
         if (state.user) {
             setLoading(false);
+            
         } else {
             API.get_credentials().then(res => {
                 dispatch({
@@ -44,6 +63,7 @@ const Transaction = () => {
                     userID: res.data
                 });
                 console.log(`User ID: ${res.data}`);
+                // getTransactions();
             }).catch(err => {
                 console.log(err);
             }).finally(_ => {
@@ -60,6 +80,11 @@ const Transaction = () => {
                 state.user ? 
                     <div>
                         Transaction
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
+<button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
+<button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
+<button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
+                        
                         <div className="row">
                             <div className="col-lg-4 offset-lg-4">
                                 <div className="card">
@@ -97,10 +122,7 @@ const Transaction = () => {
     );
 };
 
-{/* <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
-<button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
-<button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
-<button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button> */}
+
 
 export default Transaction;
 

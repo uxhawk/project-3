@@ -14,8 +14,9 @@ const userSeed = [
     password: '12345',
     financialTransactions: [
       {
-        category: 'income',
         amount: 100,
+        category: 'income',
+        details: 'got a lot of burgers',
         date: new Date(Date.now()),
       },
     ],

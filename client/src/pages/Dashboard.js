@@ -3,7 +3,7 @@ import { useStoreContext } from '../utils/GlobalState';
 import { Redirect } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import API from '../utils/API';
-import { LOGIN, LOGOUT } from '../utils/actions';
+import { LOGIN, LOGOUT, GET_TRANSACTIONS } from '../utils/actions';
 import '../App.css';
 
 
@@ -27,6 +27,18 @@ const Dashboard = () => {
       }))
       .catch(err => console.log(err));
   }
+
+  function getTransactions() {
+    API.getTransactions(state.user)
+        .then((res) => {
+            dispatch({
+                type: GET_TRANSACTIONS,
+                userFinancials: res.data[0].userFinancials,
+            });
+        })
+        .catch((err) => console.log(err));
+        console.log(state.userFinancials);
+}
     
     useEffect(() => {
       const script = document.createElement("script");
@@ -36,6 +48,7 @@ const Dashboard = () => {
   
       document.body.appendChild(script);
       
+      getTransactions();
       if (state.user) {        
           setLoading(false);
       } else {

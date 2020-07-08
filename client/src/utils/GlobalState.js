@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useContext } from "react";
 import update from 'react-addons-update';
-import { NEW_USER, LOGOUT, LOGIN, ADD_SYMBOLS, UPDATE_PRICE, GET_STOCK_PRICE } from "./actions";
+import { NEW_USER, LOGOUT, LOGIN, ADD_SYMBOLS, UPDATE_PRICE, GET_STOCK_PRICE, ADD_TRANSACTION, GET_TRANSACTIONS } from "./actions";
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
@@ -59,7 +59,22 @@ const reducer = (state, action) => {
             $set: action.lastUpdate,
           },
         }
-      })
+      });
+      // case ADD_TRANSACTION:
+      //   return update(state, {
+      //       userFinancials: {
+      //         $push: [action.transaction],
+      //       }
+      //   });
+        case GET_TRANSACTIONS:
+          return {
+            ...state,
+            userFinancials: [...action.userFinancials],
+          }
+        // return {
+        //   ...state,
+        //   userFinancials: [action.transaction, ...state.userFinancials],
+        // };
     default:
       return state;
   }
