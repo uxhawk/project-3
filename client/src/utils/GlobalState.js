@@ -1,9 +1,11 @@
 import React, { createContext, useReducer, useContext } from "react";
 import update from 'react-addons-update';
-import { NEW_USER, LOGOUT, LOGIN, ADD_SYMBOLS, UPDATE_PRICE, GET_STOCK_PRICE, ADD_TRANSACTION, GET_TRANSACTIONS } from "./actions";
+import { NEW_USER, LOGOUT, LOGIN, ADD_SYMBOLS, UPDATE_PRICE, GET_STOCK_PRICE, ADD_TRANSACTION, GET_TRANSACTIONS, UPDATE_SUMS } from "./actions";
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
+
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -60,21 +62,16 @@ const reducer = (state, action) => {
           },
         }
       });
-      // case ADD_TRANSACTION:
-      //   return update(state, {
-      //       userFinancials: {
-      //         $push: [action.transaction],
-      //       }
-      //   });
-        case GET_TRANSACTIONS:
-          return {
-            ...state,
-            userFinancials: [...action.userFinancials],
-          }
-        // return {
-        //   ...state,
-        //   userFinancials: [action.transaction, ...state.userFinancials],
-        // };
+    case GET_TRANSACTIONS:
+      return {
+        ...state,
+        userFinancials: [...action.userFinancials],
+      };
+    case UPDATE_SUMS:
+      return {
+        ...state,
+        sumTransactions: action.sumTransactions,
+      };
     default:
       return state;
   }
@@ -111,12 +108,14 @@ const StoreProvider = ({ value = [], ...props }) => {
     autoFillSymbols: [],
     user: '',
     userFinancials: [],
-    currentStockSearch: {
-      name: '',
-      currentPrice: 0,
-      symbol: '',
-      lastUpdate: '',
-    },
+    sumTransactions: {
+      income: 0,
+      groceries: 0,
+      mortgageRent: 0,
+      utilities: 0,
+      barsRestaurant: 0,
+      travel: 0,
+    }
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

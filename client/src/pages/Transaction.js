@@ -19,9 +19,12 @@ const Transaction = () => {
     function submitForm(event) {
         event.preventDefault();
 
+        if(amountRef.current.value === 0 || detailsRef.current.value === 0) {
+            return alert('Please enter values for all fields.')
+        }
         const transaction = {
             amount: amountRef.current.value,
-            date: dateRef.current.value,
+            date: new Date(Date.now()).toLocaleString(),
             category: categoryRef.current.value,
             details: detailsRef.current.value,
             userId: state.user,
@@ -29,6 +32,10 @@ const Transaction = () => {
         API.submitTransaction(state.user, transaction)
             .then(() => {
                 getTransactions();
+            amountRef.current.value = 0;
+            categoryRef.current.value = 'income';
+            detailsRef.current.value = '';
+            
             })
             .catch((err) => console.log(err));
     }
@@ -81,9 +88,9 @@ const Transaction = () => {
                     <div>
                         Transaction
                         <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
-<button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
-<button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
-<button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
+                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
                         
                         <div className="row">
                             <div className="col-lg-4 offset-lg-4">
@@ -91,16 +98,14 @@ const Transaction = () => {
                                     <div className="card-body">
                                         Add transactions and payments to track your budget
                                         <form>
-                                            <input type="number" id="transactionAmount" className="form-control" placeholder="$$$" required="" autoFocus="" ref={amountRef}/>
-                                            <input type="number" id="transactionAmount" className="form-control" placeholder="Transaction Date" required="" autoFocus="" ref={dateRef}/>
-                                            
+                                            <input type="number" id="transactionAmount" className="form-control" placeholder="$$$" required="" autoFocus="" ref={amountRef}/>                                            
                                             <select id="category" className="form-control" ref={categoryRef}>
                                                 <option value="income">Income</option>
-                                                <option value="bar/restaurant">Bar/Restaurant</option>
+                                                <option value="barsRestaurant">Bar/Restaurant</option>
                                                 <option value="travel">Travel</option>
                                                 <option value="groceries">Grocery Store</option>
                                                 <option value="utilities">Bill</option>
-                                                <option value="mortgage/rent"></option>
+                                                <option value="mortgageRent">Mortgage/Rent</option>
                                             </select> 
                                             <textarea className="form-control" aria-label="With textarea" placeholder="Transaction notes and details" ref={detailsRef}></textarea>
                                             <button className="btn btn-primary" type="submit" onClick={(event) => {submitForm(event)}}>Add Transaction</button>

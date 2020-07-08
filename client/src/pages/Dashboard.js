@@ -3,7 +3,7 @@ import { useStoreContext } from '../utils/GlobalState';
 import { Redirect } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import API from '../utils/API';
-import { LOGIN, LOGOUT, GET_TRANSACTIONS } from '../utils/actions';
+import { LOGIN, LOGOUT, GET_TRANSACTIONS, UPDATE_SUMS } from '../utils/actions';
 import '../App.css';
 
 
@@ -12,6 +12,33 @@ const Dashboard = () => {
   const [state, dispatch] = useStoreContext();
   let history = useHistory();
 
+  function calculateSums() {
+      const categoriesArr = ['income', 'barRestaurant', 'travel', 'groceries', 'utilities', 'mortgageRent'];
+      const transactionsArr = state.userFinancials;
+      let newSumObject =  {
+        income: 0,
+        groceries: 0,
+        mortgageRent: 0,
+        utilities: 0,
+        barsRestaurant: 0,
+        travel: 0,
+      }
+
+      categoriesArr.forEach((category) => {
+          const filteredTransactions = transactionsArr.filter((transaction) => {
+              return transaction.category === category;
+          });
+          let sum = 0;
+          filteredTransactions.forEach((item) => {
+              sum += parseInt(item.amount);
+          });
+          newSumObject[category] = sum;
+      })
+      dispatch({
+          type: UPDATE_SUMS,
+          sumTransactions: newSumObject,
+      })
+  }
 
   function handleNavClick(event) {
     const destination = event.target.getAttribute('nav-value');
@@ -49,6 +76,9 @@ const Dashboard = () => {
       document.body.appendChild(script);
       
       getTransactions();
+      if (state.userFinancials.length > 0) {
+        calculateSums();
+      }
       if (state.user) {        
           setLoading(false);
       } else {
@@ -79,8 +109,8 @@ const Dashboard = () => {
                         <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
                         <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
                       <div className="tiles">
-                          <div className="item color">item 1</div>
-                          <div className="item">item 2</div>
+                          <div className="item">{state.sumTransactions.income}</div>
+                          <div className="item">{state.sumTransactions.groceries}</div>
                           <div className="item">item 3</div>
                           <div className="item">item 4</div>
                           <div className="item">item 5</div>
