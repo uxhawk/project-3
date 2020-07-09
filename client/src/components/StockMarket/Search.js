@@ -74,7 +74,7 @@ const Search = () => {
                     <div className="input-group mb-3">
                         <input list="availableStocks" type="text" className="form-control" id="stockSearch" placeholder="Search for stock prices" />
                         <div className="input-group-append">
-                            <button className="btn btn-info" type="button" id="button-addon2" onClick={() => {clearStockSearch()}}><i class="far fa-times-circle"></i></button>
+                            <button className="btn btn-info" type="button" id="button-addon2" onClick={() => {clearStockSearch()}}><i className="far fa-times-circle"></i></button>
                             <button className="btn btn-primary" type="button" id="button-addon3" onClick={() => {getPrice()}}>Search Stocks</button>
                         </div>
                     </div>

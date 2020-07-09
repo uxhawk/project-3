@@ -12,15 +12,15 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  userFinancials: [
-    {
-      category: String,
-      amount: Number,
-      date: Date,
-      notes: String,
-    },
-  ],
+  userFinancials: [],
 });
+
+// userSchema.methods.addNewTransaction = function(transaction) {
+//   this.userFinancials.push(transaction);
+  
+
+//   return this.userFinancials;
+// };
 
 const User = mongoose.model('user', userSchema);
 
