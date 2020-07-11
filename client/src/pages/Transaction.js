@@ -3,6 +3,7 @@ import { useStoreContext } from '../utils/GlobalState';
 import { Redirect, useHistory } from 'react-router-dom';
 import API from '../utils/API';
 import { LOGIN, ADD_TRANSACTION, GET_TRANSACTIONS } from '../utils/actions';
+import HomeButton from '../components/HomeButton';
 
 const Transaction = () => {
     const [loading, setLoading] = useState(true);
@@ -32,7 +33,7 @@ const Transaction = () => {
         API.submitTransaction(state.user, transaction)
             .then(() => {
                 getTransactions();
-            amountRef.current.value = 0;
+            amountRef.current.value = '';
             categoryRef.current.value = 'income';
             detailsRef.current.value = '';
             
@@ -86,11 +87,7 @@ const Transaction = () => {
                 {
                 state.user ? 
                     <div>
-                        Transaction
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
+                        <HomeButton />
                         
                         <div className="row">
                             <div className="col-lg-4 offset-lg-4">
