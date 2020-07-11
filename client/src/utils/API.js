@@ -39,6 +39,12 @@ export default {
     );
   },
   getTransactions: function(id) {
-    return axios.get('api/transactions/' +id)
+    return axios.get('api/transactions/' +id);
+  },
+  saveGoal: function(id, goalData) {
+    return axios.post('/api/goals/' +id, goalData);
+  },
+  getAllGoals: function(id) {
+    return axios.get('api/goals/' +id);
   }
 };

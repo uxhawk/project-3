@@ -3,7 +3,7 @@ import { useStoreContext } from '../utils/GlobalState';
 import { Redirect } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import API from '../utils/API';
-import { LOGIN, LOGOUT, GET_TRANSACTIONS, UPDATE_SUMS } from '../utils/actions';
+import { LOGIN, LOGOUT, GET_TRANSACTIONS, UPDATE_SUMS, GET_GOALS } from '../utils/actions';
 import '../App.css';
 
 
@@ -39,6 +39,17 @@ const Dashboard = () => {
           sumTransactions: newSumObject,
       })
   }
+  const numGoals = state.userGoals.length;
+  function getGoals() {
+    API.getAllGoals(state.user)
+        .then((res) => {
+            dispatch({
+                type: GET_GOALS,
+                userGoals: res.data[0].userGoals,
+            })
+        })
+    console.log(state.userGoals[0]);
+}
 
   function handleNavClick(event) {
     const destination = event.target.getAttribute('nav-value');
@@ -64,18 +75,16 @@ const Dashboard = () => {
             });
         })
         .catch((err) => console.log(err));
-        console.log(state.userFinancials);
 }
     
     useEffect(() => {
       const script = document.createElement("script");
-
       script.src = "./js/multiple.js";
       script.async = true;
-  
       document.body.appendChild(script);
       
       getTransactions();
+      getGoals();
       if (state.userFinancials.length > 0) {
         calculateSums();
       }
@@ -111,7 +120,14 @@ const Dashboard = () => {
                       <div className="tiles">
                           <div className="item">{state.sumTransactions.income}</div>
                           <div className="item">{state.sumTransactions.groceries}</div>
-                          <div className="item">item 3</div>
+                            {/* {state.userGoals.length > 0 ? <div className="item">
+                                {state.userGoals[state.userGoals.length -1].title}
+                                Check the status of your {state.userGoals.length} goals
+                                
+                                </div> :
+                            <div className="item">empty</div>
+                            } */}
+                        <div className="item">Check the status of your goals</div>
                           <div className="item">item 4</div>
                           <div className="item">item 5</div>
                           <div className="item">item 6</div>
