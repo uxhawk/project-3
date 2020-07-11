@@ -13,10 +13,58 @@ var multipleFood = new Multiple({
   opacity: .9
 });
 
-var multipleFTravel = new Multiple({
+var multipleSignout = new Multiple({
+  selector: '.item-signout',
+  background: 'linear-gradient(#273463, #8B4256)',
+  opacity: true
+});
+
+var multipleIncome = new Multiple({
+  selector: '.item-income',
+  background: 'linear-gradient(rgb(70, 106, 177), #32A668)',
+  opacity: .9
+});
+
+var multipleTravel = new Multiple({
   selector: '.item-travel',
   background: 'linear-gradient(rgb(70, 106, 177), #32A668)',
-  opacity: true
+  opacity: .9
+});
+
+var multipleBills = new Multiple({
+  selector: '.item-bills',
+  background: 'linear-gradient(rgb(70, 106, 177), #32A668)',
+  opacity: .9
+});
+
+var multipleBarsAndRestaurants = new Multiple({
+  selector: '.item-barsAndRestaurants',
+  background: 'linear-gradient(rgb(70, 106, 177), #32A668)',
+  opacity: .9
+});
+
+var multipleGroceries = new Multiple({
+  selector: '.item-groceries',
+  background: 'linear-gradient(rgb(70, 106, 177), #32A668)',
+  opacity: .9
+});
+
+var multipleRent = new Multiple({
+  selector: '.item-rent',
+  background: 'linear-gradient(rgb(70, 106, 177), #32A668)',
+  opacity: .9
+});
+
+var multipleAddTransactions = new Multiple({
+  selector: '.item-addTransactions',
+  background: 'linear-gradient(#273463, #8B4256)',
+  opacity: .9
+});
+
+var multipleGoals = new Multiple({
+  selector: '.item-goals',
+  background: 'linear-gradient(#273463, #8B4256)',
+  opacity: .9
 });
 
 

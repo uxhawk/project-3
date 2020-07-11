@@ -3,7 +3,7 @@ import { useStoreContext } from '../utils/GlobalState';
 import { Redirect } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import API from '../utils/API';
-import { LOGIN, LOGOUT, GET_TRANSACTIONS, UPDATE_SUMS, GET_GOALS } from '../utils/actions';
+import { LOGIN, LOGOUT, GET_TRANSACTIONS, UPDATE_SUMS } from '../utils/actions';
 import '../App.css';
 
 
@@ -39,17 +39,6 @@ const Dashboard = () => {
           sumTransactions: newSumObject,
       })
   }
-  const numGoals = state.userGoals.length;
-  function getGoals() {
-    API.getAllGoals(state.user)
-        .then((res) => {
-            dispatch({
-                type: GET_GOALS,
-                userGoals: res.data[0].userGoals,
-            })
-        })
-    console.log(state.userGoals[0]);
-}
 
   function handleNavClick(event) {
     const destination = event.target.getAttribute('nav-value');
@@ -75,16 +64,18 @@ const Dashboard = () => {
             });
         })
         .catch((err) => console.log(err));
+        console.log(state.userFinancials);
 }
     
     useEffect(() => {
       const script = document.createElement("script");
+
       script.src = "./js/multiple.js";
       script.async = true;
+  
       document.body.appendChild(script);
       
       getTransactions();
-      getGoals();
       if (state.userFinancials.length > 0) {
         calculateSums();
       }
@@ -118,31 +109,32 @@ const Dashboard = () => {
                         <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
                         <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
                       <div className="tiles">
-                          <div className="item">{state.sumTransactions.income}</div>
-                          <div className="item">{state.sumTransactions.groceries}</div>
-                            {/* {state.userGoals.length > 0 ? <div className="item">
-                                {state.userGoals[state.userGoals.length -1].title}
-                                Check the status of your {state.userGoals.length} goals
-                                
-                                </div> :
-                            <div className="item">empty</div>
-                            } */}
-                        <div className="item">Check the status of your goals</div>
-                          <div className="item">item 4</div>
-                          <div className="item">item 5</div>
-                          <div className="item">item 6</div>
-                          <div className="item">item 7</div>
-                          <div className="item">item 8</div>
-                          <div className="item">item 9</div>
-                          <div className="item-tall">item 10</div>
-                          <div className="item">item 11</div>
-                          <div className="item">item 12</div>  
-                      </div>
-                      {/* <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
+                          <div class="item-income">{state.sumTransactions.income}</div>
+                          <div class="item-travel">Travel</div>
+                          <div class="item-bills">
+                            <p class="pt-3">Bills</p>
+                            <p>INCOME</p>
+                          </div>
+                          <div class="item-signout">
+                              <div class="row">
+                                  <div class="col-sm-12 text-danger">
+                                      <img src="client\src\img\Sign-out-icon.png" style="margin:auto; width:221px;display:block" />
+                                      <p>SIGN OUT</p>
+                                  </div>
+                              </div> 
+                          </div>
+                          <div class="item-addTransactions">Add Transaction</div>
+                          <div class="item-groceries">{state.sumTransactions.groceries}</div>
+                            {/* <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
                       <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
                       <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
                       <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
                       <button className="btn btn-info" onClick={() => {handleSignOut()}} nav-value="dashboard">Sign Out</button> */}
+                          <div class="item-goals">GOALS</div>
+                          <div class="item-barsAndRestaurants">Bars and Restaurants</div>
+                          <div class="item-rent">Rent</div> 
+                      </div>
+                      
                   </div>  : 
                   <Redirect to="/login" />
               }

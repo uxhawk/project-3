@@ -76,21 +76,84 @@
     grid-auto-flow: dense;
     text-align: center;
     position: relative;
-    line-height: 200px;
+    grid-auto-rows: minmax(200px, auto);
+    
   }
   
-  .item {
-      grid-row: span 1;
-        
+  .item-signout {
+    align-items: center;
+    justify-content: center;
+    display: flex
   }
   
   .item-tall {
       grid-row: span 2;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-align: center;
         
   }
   
   .item:nth-of-type(3n) {
       grid-column: span 2;
+  }
+  
+  .item-income {
+    grid-column: span 2;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .item-travel {
+    grid-row: span 2;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .item-bills {
+    grid-row: span 1;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .item-addTransactions {
+    grid-row: span 1;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .item-groceries {
+    grid-row: span 2;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .item-goals {
+    grid-row: span 2;
+    grid-column: span 2;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .item-barsAndRestaurants {
+    grid-row: span 1;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .item-rent {
+    grid-row: span 1;
+    align-items: center;
+    justify-content: center;
+    position: relative;
   }
   
   /* body {
