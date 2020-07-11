@@ -125,11 +125,7 @@ const Dashboard = () => {
                           </div>
                           <div class="item-addTransactions">Add Transaction</div>
                           <div class="item-groceries">{state.sumTransactions.groceries}</div>
-                            {/* <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
-                      <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
-                      <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
-                      <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
-                      <button className="btn btn-info" onClick={() => {handleSignOut()}} nav-value="dashboard">Sign Out</button> */}
+
                           <div class="item-goals">GOALS</div>
                           <div class="item-barsAndRestaurants">Bars and Restaurants</div>
                           <div class="item-rent">Rent</div> 
