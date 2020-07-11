@@ -2,41 +2,84 @@ import React, { useEffect, useState } from 'react';
 import { useStoreContext } from '../utils/GlobalState';
 import { Redirect, useHistory } from 'react-router-dom';
 import API from '../utils/API';
-import { LOGIN } from '../utils/actions';
+import { LOGIN, GET_TRANSACTIONS, UPDATE_SUMS } from '../utils/actions';
 import GoalsForm from '../components/goals/GoalsForm';
-import { Line } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 
 const Goals = () => {
     const [loading, setLoading] = useState(true);
     const [state, dispatch] = useStoreContext();
     let history = useHistory();
 
+    function getTransactions() {
+        API.getTransactions(state.user)
+            .then((res) => {
+                dispatch({
+                    type: GET_TRANSACTIONS,
+                    userFinancials: res.data[0].userFinancials,
+                });
+            })
+            .catch((err) => console.log(err));
+    }
+
+    function calculateSums() {
+        const categoriesArr = ['income', 'barRestaurant', 'travel', 'groceries', 'utilities', 'mortgageRent'];
+        const transactionsArr = state.userFinancials;
+        let newSumObject =  {
+          income: 0,
+          groceries: 0,
+          mortgageRent: 0,
+          utilities: 0,
+          barsRestaurant: 0,
+          travel: 0,
+        }
+  
+        categoriesArr.forEach((category) => {
+            const filteredTransactions = transactionsArr.filter((transaction) => {
+                return transaction.category === category;
+            });
+            let sum = 0;
+            filteredTransactions.forEach((item) => {
+                sum += parseInt(item.amount);
+            });
+            newSumObject[category] = sum;
+        })
+        dispatch({
+            type: UPDATE_SUMS,
+            sumTransactions: newSumObject,
+        })
+    }
+
     function handleNavClick(event) {
         const destination = event.target.getAttribute('nav-value');
         history.push(`/${destination}`);
     }
 
+    const dataArr = [
+        state.sumTransactions.barsRestaurant,
+        state.sumTransactions.travel,
+        state.sumTransactions.groceries, 
+        state.sumTransactions.utilities,
+        state.sumTransactions.mortgageRent
+    ]
+
     const data = {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        labels: ["Bars/Restaurants", "Travel", "Groceries", "Utilities", "Mortgage/Rent"],
         datasets: [
           {
-            label: "First dataset",
-            data: [33, 53, 85, 41, 44, 65],
+            label: "Budget",
+            data: dataArr,
             fill: true,
-            backgroundColor: "rgba(75,192,192,0.2)",
-            borderColor: "rgba(75,192,192,1)"
+            backgroundColor: ["red", "blue", "green", "yellow", "red"]
           },
-          {
-            label: "Second dataset",
-            data: [33, 25, 35, 51, 54, 76],
-            fill: false,
-            borderColor: "#742774"
-          }
         ]
       };
 
     useEffect(() => {
-        console.log(state.user.userGoals);
+        getTransactions();
+        if (state.userFinancials.length > 0) {
+          calculateSums();
+        }
         if (state.user) {
             setLoading(false);
         } else {
@@ -69,7 +112,7 @@ const Goals = () => {
 
                         <div className="row">
                             <div className='col-md-8 offset-md-2'>
-                                <Line data={data} />
+                                <Doughnut data={data} />
                             </div>
                         </div>
 
