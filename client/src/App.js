@@ -21,6 +21,7 @@ function App() {
           <Route exact path='/stock-market' component={StockMarket} />
           <Route exact path='/goals' component={Goals} />
           <Route exact path='/transaction' component={Transaction} />
+          <Route component={NoMatch} />
         </Switch>
         </StoreProvider>
       </div>

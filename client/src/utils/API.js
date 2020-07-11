@@ -26,5 +26,6 @@ export default {
   },
   getCurrentStockPrice: function(symbol) {
     return axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=1BGUWMMYKV1JPI0R`);
-  }
+  },
+  
 };

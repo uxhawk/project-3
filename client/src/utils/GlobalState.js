@@ -1,6 +1,13 @@
 import React, { createContext, useReducer, useContext } from "react";
 import update from 'react-addons-update';
-import { NEW_USER, LOGOUT, LOGIN, ADD_SYMBOLS, UPDATE_PRICE, GET_STOCK_PRICE } from "./actions";
+import { NEW_USER, LOGOUT, LOGIN, ADD_SYMBOLS, UPDATE_PRICE, GET_STOCK_PRICE, SET_CURRENT_POST,
+  REMOVE_POST,
+  UPDATE_POSTS,
+  ADD_POST,
+  ADD_FAVORITE,
+  UPDATE_FAVORITES,
+  REMOVE_FAVORITE,
+  LOADING} from "./actions";
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
@@ -111,4 +118,5 @@ const useStoreContext = () => {
   return useContext(StoreContext);
 };
 
-export { StoreProvider, useStoreContext };
+
+
