@@ -13,6 +13,7 @@ const userSchema = new Schema({
     required: true,
   },
   userFinancials: [],
+  userGoals: [],
 });
 
 // userSchema.methods.addNewTransaction = function(transaction) {

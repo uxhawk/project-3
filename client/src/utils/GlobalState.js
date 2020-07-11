@@ -1,11 +1,9 @@
 import React, { createContext, useReducer, useContext } from "react";
 import update from 'react-addons-update';
-import { NEW_USER, LOGOUT, LOGIN, ADD_SYMBOLS, UPDATE_PRICE, GET_STOCK_PRICE, ADD_TRANSACTION, GET_TRANSACTIONS, UPDATE_SUMS } from "./actions";
+import { NEW_USER, LOGOUT, LOGIN, ADD_SYMBOLS, UPDATE_PRICE, GET_STOCK_PRICE, ADD_TRANSACTION, GET_TRANSACTIONS, UPDATE_SUMS, ADD_GOALS, GET_GOALS } from "./actions";
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
-
-
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -72,6 +70,16 @@ const reducer = (state, action) => {
         ...state,
         sumTransactions: action.sumTransactions,
       };
+    // case ADD_GOALS:
+    //   return {
+    //     ...state,
+    //     userGoals: action.goal
+    //   }
+    case GET_GOALS: 
+    return {
+      ...state,
+      userGoals: [...action.userGoals],
+    }
     default:
       return state;
   }
@@ -108,6 +116,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     autoFillSymbols: [],
     user: '',
     userFinancials: [],
+    userGoals: [],
     sumTransactions: {
       income: 0,
       groceries: 0,
