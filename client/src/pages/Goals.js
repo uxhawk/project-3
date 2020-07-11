@@ -5,6 +5,7 @@ import API from '../utils/API';
 import { LOGIN, GET_TRANSACTIONS, UPDATE_SUMS } from '../utils/actions';
 import GoalsForm from '../components/goals/GoalsForm';
 import { Doughnut } from "react-chartjs-2";
+import HomeButton from '../components/HomeButton';
 
 const Goals = () => {
     const [loading, setLoading] = useState(true);
@@ -48,11 +49,6 @@ const Goals = () => {
             type: UPDATE_SUMS,
             sumTransactions: newSumObject,
         })
-    }
-
-    function handleNavClick(event) {
-        const destination = event.target.getAttribute('nav-value');
-        history.push(`/${destination}`);
     }
 
     const dataArr = [
@@ -104,11 +100,7 @@ const Goals = () => {
                 {
                 state.user ? 
                     <div>
-                        Goals
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
+                        <HomeButton />
 
                         <div className="row">
                             <div className='col-md-8 offset-md-2'>

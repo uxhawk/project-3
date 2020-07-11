@@ -130,7 +130,6 @@ const Dashboard = () => {
                           <div class="item-barsAndRestaurants">Bars and Restaurants</div>
                           <div class="item-rent">Rent</div> 
                       </div>
-                      
                   </div>  : 
                   <Redirect to="/login" />
               }

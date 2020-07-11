@@ -52,7 +52,7 @@ const Search = () => {
                 const mostRecentPrice = res.data["Time Series (5min)"][mostRecentUpdateTime]["1. open"];
                 dispatch({
                     type: GET_STOCK_PRICE,
-                    price: mostRecentPrice,
+                    price: parseFloat(mostRecentPrice).toFixed(2),
                     lastUpdate: mostRecentUpdateTime,
                     symbol: inputSymbol,
                     company: company,
