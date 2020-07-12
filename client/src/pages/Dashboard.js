@@ -75,6 +75,17 @@ const Dashboard = () => {
         .catch((err) => console.log(err));
         console.log(state.userFinancials);
 }
+
+function logOut() {
+  API.logout()
+    .then(() => {
+     dispatch({
+       type: LOGOUT,
+       user: ''
+     });
+    })
+    .catch((err) => {console.log(err)})
+}
     
     useEffect(() => {
       const script = document.createElement("script");
@@ -142,15 +153,14 @@ const Dashboard = () => {
                           <div className="item-signout">
                               <div className="row">
                                   <div className="col-sm-12 text-white">
-                                      {/* <img src="img/Sign-out-icon.png" style={styles.imgStyle} /> */}
-                                      <h3 className="text-uppercase text-white">Sign Out</h3>
+                                      <h3 className="text-uppercase text-white" onClick={() => {logOut()}}>Sign Out</h3>
                                       <ion-icon name="log-out-outline" size="large"></ion-icon>
                                   </div>
                               </div> 
                           </div>
                           <div className="item-addTransactions">
                           <div className="text-center text-white pt-5">
-                              <h3>Add Transactions</h3>
+                              <h3 onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</h3>
                               <ion-icon name="add-circle-outline" size="large"></ion-icon>
                             </div>
                           </div>
@@ -164,8 +174,15 @@ const Dashboard = () => {
 
                           <div className="item-goals">
                             <div className="text-center text-white pt-5">
-                                  <h3 className="text-uppercase">Goals</h3>
+                                  <h3 className="text-uppercase" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals & Budget</h3>
                                   <h4 className="text-uppercase">Check in on the status of your budget and savings goals.</h4>
+                                  <ion-icon name="bar-chart-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+                          <div className="item-goals">
+                            <div className="text-center text-white pt-5">
+                                  <h3 className="text-uppercase" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</h3>
+                                  <h4 className="text-uppercase">Catch a glimpse of Wall St.</h4>
                                   <ion-icon name="trending-up-outline" size="large"></ion-icon>
                             </div>
                           </div>

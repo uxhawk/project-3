@@ -17,6 +17,7 @@ const reducer = (state, action) => {
         ...state,
         user: action.userID,
         userFinancials: action.userFinancials,
+        userFinancials: action.userFinancials,
       };
     case LOGIN:
       return {

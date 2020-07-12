@@ -147,7 +147,15 @@ h4 {
   }
   
   .item-goals {
-    grid-row: span 2;
+    grid-row: span 1;
+    grid-column: span 2;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .item-stock-market {
+    grid-row: span 1;
     grid-column: span 2;
     align-items: center;
     justify-content: center;
