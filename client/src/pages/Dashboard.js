@@ -17,12 +17,11 @@ const Dashboard = () => {
       margin: "auto",
       maxWidth: "221px",
       display: "block",
-
     }
   };
 
   function calculateSums() {
-      const categoriesArr = ['income', 'barRestaurant', 'travel', 'groceries', 'utilities', 'mortgageRent'];
+      const categoriesArr = ['income', 'barsRestaurant', 'travel', 'groceries', 'utilities', 'mortgageRent'];
       const transactionsArr = state.userFinancials;
       let newSumObject =  {
         income: 0,

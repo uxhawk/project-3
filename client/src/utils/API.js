@@ -33,7 +33,6 @@ export default {
       amount: transaction.amount,
       date: transaction.date,
       category: transaction.category,
-      details: transaction.details,
       user: transaction.user
     }
     );

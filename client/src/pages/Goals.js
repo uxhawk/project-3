@@ -24,7 +24,7 @@ const Goals = () => {
     }
 
     function calculateSums() {
-        const categoriesArr = ['income', 'barRestaurant', 'travel', 'groceries', 'utilities', 'mortgageRent'];
+        const categoriesArr = ['income', 'barsRestaurant', 'travel', 'groceries', 'utilities', 'mortgageRent'];
         const transactionsArr = state.userFinancials;
         let newSumObject =  {
           income: 0,
@@ -66,7 +66,7 @@ const Goals = () => {
             label: "Budget",
             data: dataArr,
             fill: true,
-            backgroundColor: ["red", "blue", "green", "yellow", "red"]
+            backgroundColor: ["red", "blue", "green", "yellow", "orange"]
           },
         ]
       };

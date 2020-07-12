@@ -20,31 +20,22 @@ const Transaction = () => {
     function submitForm(event) {
         event.preventDefault();
 
-        if(amountRef.current.value === 0 || detailsRef.current.value === 0) {
-            return alert('Please enter values for all fields.')
+        if(amountRef.current.value === 0) {
+            return alert('Please enter a transaction amount.')
         }
         const transaction = {
             amount: amountRef.current.value,
             date: new Date(Date.now()).toLocaleString(),
             category: categoryRef.current.value,
-            details: detailsRef.current.value,
             userId: state.user,
         }
         API.submitTransaction(state.user, transaction)
             .then(() => {
                 getTransactions();
             amountRef.current.value = '';
-            categoryRef.current.value = 'income';
-            detailsRef.current.value = '';
-            
+            categoryRef.current.value = 'income';            
             })
             .catch((err) => console.log(err));
-    }
-
-
-    function handleNavClick(event) {
-        const destination = event.target.getAttribute('nav-value');
-        history.push(`/${destination}`);
     }
 
     function getTransactions() {
