@@ -2,6 +2,32 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+.gradient {
+  background: linear-gradient(rgb(70, 106, 177, .8), #32A668)
+}
+
+.btn-white {
+  background-color: white;
+}
+
+.form-control {
+  color: white;
+}
+
+
+
+.form-control:focus {
+  color: white;
+}
+
+.form-control::placeholder {
+  color:white;
+}
+
+.form-control:active {
+  color: white;
+}
+
 h2 {
   font-size: 52px;
 }
@@ -63,7 +89,6 @@ h4 {
   
   .multiple-mobile:before {
     content: '';
-    
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -103,8 +128,7 @@ h4 {
       align-items: center;
       justify-content: center;
       position: relative;
-      box-align: center;
-        
+      box-align: center;   
   }
   
   .item:nth-of-type(3n) {
@@ -148,6 +172,14 @@ h4 {
   
   .item-goals {
     grid-row: span 1;
+    grid-column: span 2;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .item-auth {
+    grid-row: span 2;
     grid-column: span 2;
     align-items: center;
     justify-content: center;

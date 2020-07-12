@@ -88,33 +88,23 @@ const Transaction = () => {
                 state.user ? 
                     <div>
                         <HomeButton />
-                        
                         <div className="row">
                             <div className="col-lg-4 offset-lg-4">
-                                <div className="card">
-                                    <div className="card-body">
-                                        Add transactions and payments to track your budget
-                                        <form>
-                                            <input type="number" id="transactionAmount" className="form-control" placeholder="$$$" required="" autoFocus="" ref={amountRef}/>                                            
-                                            <select id="category" className="form-control" ref={categoryRef}>
-                                                <option value="income">Income</option>
-                                                <option value="barsRestaurant">Bar/Restaurant</option>
-                                                <option value="travel">Travel</option>
-                                                <option value="groceries">Grocery Store</option>
-                                                <option value="utilities">Bill</option>
-                                                <option value="mortgageRent">Mortgage/Rent</option>
-                                            </select> 
-                                            <textarea className="form-control" aria-label="With textarea" placeholder="Transaction notes and details" ref={detailsRef}></textarea>
-                                            <button className="btn btn-primary" type="submit" onClick={(event) => {submitForm(event)}}>Add Transaction</button>
-                                          
-                                            
-
-                                        </form>
-                                    </div>
-                                </div>
+                                <form className="mt-5 gradient p-5">
+                                    <input type="number" id="transactionAmount" className="form-control mb-3" placeholder="Amount" required="" autoFocus="" ref={amountRef}/>                                            
+                                    <select id="category" className="form-control mb-3" ref={categoryRef}>
+                                        <option value="income">Income</option>
+                                        <option value="barsRestaurant">Bar/Restaurant</option>
+                                        <option value="travel">Travel</option>
+                                        <option value="groceries">Grocery Store</option>
+                                        <option value="utilities">Bill</option>
+                                        <option value="mortgageRent">Mortgage/Rent</option>
+                                    </select> 
+                                    {/* <textarea className="form-control mb-3" aria-label="With textarea" placeholder="Transaction notes and details" ref={detailsRef}></textarea> */}
+                                    <button className="btn btn-raised btn-white btn-block mt-4" type="submit" onClick={(event) => {submitForm(event)}}>Add Transaction</button>
+                                </form>
                             </div>
                         </div>
-
                     </div>  : 
                     <Redirect to="/login" />
                 }

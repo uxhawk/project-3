@@ -9,7 +9,10 @@ const HomeButton = () => {
         history.push(`/${destination}`);
     }
     return (
-            <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Back to Dashboard</button>
+            <div className="mt-5 ml-5">
+                <p className="p-0 m-0" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard"><ion-icon name="return-up-back-outline"></ion-icon> Back to dashboard</p>
+            </div>
+            
     );
 };
 

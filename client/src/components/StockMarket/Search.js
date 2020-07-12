@@ -70,12 +70,12 @@ const Search = () => {
     return (
         <div>
            <div className="row pb-4">
-                <div className="col-lg-8 col-md-10 offset-lg-2 offset-md-1">
+                <div className="col-lg-8 col-md-10 offset-lg-2 offset-md-1 gradient p-3">
                     <div className="input-group mb-3">
                         <input list="availableStocks" type="text" className="form-control" id="stockSearch" placeholder="Search for stock prices" />
                         <div className="input-group-append">
-                            <button className="btn btn-info" type="button" id="button-addon2" onClick={() => {clearStockSearch()}}><i className="far fa-times-circle"></i></button>
-                            <button className="btn btn-primary" type="button" id="button-addon3" onClick={() => {getPrice()}}>Search Stocks</button>
+                            {/* <button className="btn btn-info" type="button" id="button-addon2" onClick={() => {clearStockSearch()}}><i className="far fa-times-circle"></i></button> */}
+                            <button className="btn btn-raised btn-white" type="button" id="button-addon3" onClick={() => {getPrice()}}>Search Stocks</button>
                         </div>
                     </div>
                     <DataList symbols={state.autoFillSymbols}/>

@@ -12,11 +12,6 @@ const StockMarket = () => {
     const [state, dispatch] = useStoreContext();
     let history = useHistory();
 
-    // function handleNavClick(event) {
-    //     const destination = event.target.getAttribute('nav-value');
-    //     history.push(`/${destination}`);
-    // }
-
     useEffect(() => {
         if (state.user) {
             setLoading(false);

@@ -53,16 +53,6 @@ const Dashboard = () => {
     const destination = event.target.getAttribute('nav-value');
     history.push(`/${destination}`);
   } 
-  
-  function handleSignOut() {
-    API.logout()
-      .then(async () => dispatch({
-        type: LOGOUT,
-        userID: '',
-        userFinancials: [],
-      }))
-      .catch(err => console.log(err));
-  }
 
   function getTransactions() {
     API.getTransactions(state.user)
@@ -86,7 +76,7 @@ function logOut() {
     })
     .catch((err) => {console.log(err)})
 }
-    
+
     useEffect(() => {
       const script = document.createElement("script");
 
@@ -123,11 +113,6 @@ function logOut() {
               {
               state.user ? 
                   <div>
-                      Dashboard
-                      <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
                       <div className="tiles">
                           <div className="item-income">
                             <div className="text-center text-white pt-5">

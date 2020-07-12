@@ -101,14 +101,11 @@ const Goals = () => {
                 state.user ? 
                     <div>
                         <HomeButton />
-
                         <div className="row">
                             <div className='col-md-8 offset-md-2'>
                                 <Doughnut data={data} />
                             </div>
                         </div>
-
-                        
                         <GoalsForm />
                     </div>  : 
                     <Redirect to="/login" />

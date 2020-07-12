@@ -6,7 +6,7 @@ const CurrentSearch = (props) => {
     }
     
     return (
-        <div className="card">
+        <div className="card gradient text-white">
             <div className="card-header d-flex justify-content-between align-items-center">
                 <div>
                     <h5 className="mb-0 pb-0">{props.currentSearch.symbol}</h5>
@@ -19,7 +19,7 @@ const CurrentSearch = (props) => {
             <div className="card-body">
                 <h5 className="mb-0 pb-0">${props.currentSearch.currentPrice}</h5>
                 <p className="small pt-0 mt-0">Updated At: {props.currentSearch.lastUpdate}</p>
-                <button className="btn btn-info" ><span className="fas fa-sync-alt pr-2" ></span>Refresh</button>
+                <button className="btn btn-raised btn-white" ><ion-icon name="refresh-outline"></ion-icon><span className="ml-2">Refresh</span></button>
                 
             </div>
         </div>

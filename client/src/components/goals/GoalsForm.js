@@ -20,7 +20,6 @@ function GoalsForm() {
             })
     }
 
-
   const handleSubmit = e => {
     e.preventDefault();
     // dispatch({ type: LOADING });
@@ -45,22 +44,14 @@ function GoalsForm() {
     }, []);
 
   return (
-    <div>
-      {/* <div className="jumbotron">
-        <img
-          className="img-fluid img-thumbnail"
-          src="https://i.pinimg.com/originals/14/46/1b/14461b476b0c3933d35c4ad7109a77fb.jpg"
-        />
-      </div> */}
-      
+    <div>      
       <div className="row mt-5">
-        <div className="col-md-6 offset-md-3">
-            <h1>Create your Financial Goal</h1>
-            <form className="form-group mb-5" onSubmit={handleSubmit}>
-              <input className="form-control mb-2" required ref={titleRef} placeholder="Goal" />
-              <textarea className="form-control mb-2" required ref={bodyRef} placeholder="Details" />
-              {/* <input className="form-control mb-5" ref={authorRef} placeholder="Name" /> */}
-              <button className="btn btn-success" disabled={state.loading} type="submit">
+        <div className="col-md-6 offset-md-3 mt-3">
+            <h3>Create Goals and Budgets</h3>
+            <form className=" gradient p-5" onSubmit={handleSubmit}>
+              <input className="form-control mb-3" required ref={titleRef} placeholder="Goal" />
+              <textarea className="form-control mb-3" required ref={bodyRef} placeholder="Details" />
+              <button className="btn btn-raised btn-white btn-block mt-4" disabled={state.loading} type="submit">
                 Save Goal
               </button>
             </form>
