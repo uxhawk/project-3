@@ -12,6 +12,15 @@ const Dashboard = () => {
   const [state, dispatch] = useStoreContext();
   let history = useHistory();
 
+  const styles = {
+    imgStyle: {
+      margin: "auto",
+      maxWidth: "221px",
+      display: "block",
+
+    }
+  };
+
   function calculateSums() {
       const categoriesArr = ['income', 'barRestaurant', 'travel', 'groceries', 'utilities', 'mortgageRent'];
       const transactionsArr = state.userFinancials;
@@ -109,26 +118,71 @@ const Dashboard = () => {
                         <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
                         <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
                       <div className="tiles">
-                          <div class="item-income">{state.sumTransactions.income}</div>
-                          <div class="item-travel">Travel</div>
-                          <div class="item-bills">
-                            <p class="pt-3">Bills</p>
-                            <p>INCOME</p>
+                          <div className="item-income">
+                            <div className="text-center text-white pt-5">
+                              <h2>${state.sumTransactions.income}</h2>
+                              <h4 className="text-uppercase">Total Income</h4>
+                              <ion-icon name="cash-outline" size="large"></ion-icon>
+                            </div>
                           </div>
-                          <div class="item-signout">
-                              <div class="row">
-                                  <div class="col-sm-12 text-danger">
-                                      <img src="client\src\img\Sign-out-icon.png" style="margin:auto; width:221px;display:block" />
-                                      <p>SIGN OUT</p>
+                          <div className="item-travel">
+                          <div className="text-center text-white pt-5">
+                              <h2>${state.sumTransactions.travel}</h2>
+                              <h4 className="text-uppercase">Travel Expenses</h4>
+                              <ion-icon name="airplane-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+                          <div className="item-bills">
+                          <div className="text-center text-white pt-5">
+                              <h2>${state.sumTransactions.utilities}</h2>
+                              <h4 className="text-uppercase">Bills & Utilities</h4>
+                              <ion-icon name="construct-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+                          <div className="item-signout">
+                              <div className="row">
+                                  <div className="col-sm-12 text-white">
+                                      {/* <img src="img/Sign-out-icon.png" style={styles.imgStyle} /> */}
+                                      <h3 className="text-uppercase text-white">Sign Out</h3>
+                                      <ion-icon name="log-out-outline" size="large"></ion-icon>
                                   </div>
                               </div> 
                           </div>
-                          <div class="item-addTransactions">Add Transaction</div>
-                          <div class="item-groceries">{state.sumTransactions.groceries}</div>
+                          <div className="item-addTransactions">
+                          <div className="text-center text-white pt-5">
+                              <h3>Add Transactions</h3>
+                              <ion-icon name="add-circle-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+                          <div className="item-groceries">
+                          <div className="text-center text-white pt-5">
+                              <h2>${state.sumTransactions.groceries}</h2>
+                              <h4 className="text-uppercase">Groceries</h4>
+                              <ion-icon name="cart-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
 
-                          <div class="item-goals">GOALS</div>
-                          <div class="item-barsAndRestaurants">Bars and Restaurants</div>
-                          <div class="item-rent">Rent</div> 
+                          <div className="item-goals">
+                            <div className="text-center text-white pt-5">
+                                  <h3 className="text-uppercase">Goals</h3>
+                                  <h4 className="text-uppercase">Check in on the status of your budget and savings goals.</h4>
+                                  <ion-icon name="trending-up-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+                          <div className="item-barsAndRestaurants">
+                            <div className="text-center text-white pt-5">
+                                <h2>${state.sumTransactions.barsRestaurant}</h2>
+                                <h4 className="text-uppercase">Bars & Restaurants</h4>
+                                <ion-icon name="beer-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+                          <div className="item-rent">
+                          <div className="text-center text-white pt-5">
+                              <h2>${state.sumTransactions.mortgageRent}</h2>
+                              <h4 className="text-uppercase">Mortgage & Rent</h4>
+                              <ion-icon name="home-outline" size="large"></ion-icon>
+                            </div>
+                            </div> 
                       </div>
                   </div>  : 
                   <Redirect to="/login" />
