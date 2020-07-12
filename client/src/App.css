@@ -14,7 +14,13 @@ body {
   color: white;
 }
 
+h3 {
+  cursor: pointer;
+}
 
+.dashboard-nav {
+  cursor: pointer;
+}
 
 .form-control:focus {
   color: white;

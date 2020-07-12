@@ -66,7 +66,13 @@ const Goals = () => {
             label: "Budget",
             data: dataArr,
             fill: true,
-            backgroundColor: ["red", "blue", "green", "yellow", "orange"]
+            backgroundColor: [
+                "rgba(50, 166, 104, .8)",
+                "rgba(9, 118, 60, .8)",
+                "rgba(50, 115, 149, .8)",
+                "rgba(235, 160, 71, .8)",
+                "rgba(235, 108, 71, .8)",
+            ],
           },
         ]
       };

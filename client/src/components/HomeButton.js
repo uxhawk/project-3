@@ -10,7 +10,7 @@ const HomeButton = () => {
     }
     return (
             <div className="mt-5 ml-5">
-                <p className="p-0 m-0" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard"><ion-icon name="return-up-back-outline"></ion-icon> Back to dashboard</p>
+                <p className="p-0 m-0 dashboard-nav" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard"><ion-icon name="return-up-back-outline"></ion-icon> Back to dashboard</p>
             </div>
             
     );
