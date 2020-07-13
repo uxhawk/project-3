@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { useStoreContext } from "../../utils/GlobalState";
 import { GET_GOALS } from "../../utils/actions";
 import API from "../../utils/API";
+import ListItem from "./ListItem";
 
 function GoalsForm() {
   const titleRef = useRef();
@@ -12,7 +13,6 @@ function GoalsForm() {
     function getGoals() {
         API.getAllGoals(state.user)
             .then((res) => {
-                // console.log(res.data[0].userGoals);
                 dispatch({
                     type: GET_GOALS,
                     userGoals: res.data[0].userGoals,
@@ -40,7 +40,7 @@ function GoalsForm() {
   };
 
     useEffect(() => {
-        console.log(state.userGoals);
+        getGoals();
     }, []);
 
   return (
@@ -48,13 +48,29 @@ function GoalsForm() {
       <div className="row mt-5">
         <div className="col-md-6 offset-md-3 mt-3">
             <h3>Create Goals and Budgets</h3>
-            <form className=" gradient p-5" onSubmit={handleSubmit}>
+            <form className="gradient p-5" onSubmit={handleSubmit}>
               <input className="form-control mb-3" required ref={titleRef} placeholder="Goal" />
               <textarea className="form-control mb-3" required ref={bodyRef} placeholder="Details" />
               <button className="btn btn-raised btn-white btn-block mt-4" disabled={state.loading} type="submit">
                 Save Goal
               </button>
             </form>
+        </div>
+      </div>
+
+      <div className="row mt-5">
+        <div className="col-md-6 offset-md-3 mt-3 gradient p-5 text-white">
+          <h3>Financial Goals</h3>
+        <ul>
+          {
+            state.userGoals.length === 0 ? <li>Create your first financial goal</li> :
+              state.userGoals.map((goal) => {
+                return (
+                    <ListItem details={goal}/>
+                )
+              })
+          }
+          </ul>
         </div>
       </div>
 

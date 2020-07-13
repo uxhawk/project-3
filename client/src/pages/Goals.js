@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useStoreContext } from '../utils/GlobalState';
 import { Redirect, useHistory } from 'react-router-dom';
 import API from '../utils/API';
-import { LOGIN, GET_TRANSACTIONS, UPDATE_SUMS } from '../utils/actions';
+import { LOGIN, GET_TRANSACTIONS, UPDATE_SUMS, GET_GOALS } from '../utils/actions';
 import GoalsForm from '../components/goals/GoalsForm';
 import { Doughnut } from "react-chartjs-2";
 import HomeButton from '../components/HomeButton';
@@ -21,6 +21,16 @@ const Goals = () => {
                 });
             })
             .catch((err) => console.log(err));
+    }
+
+    function getGoals() {
+        API.getAllGoals(state.user)
+            .then((res) => {
+                dispatch({
+                    type: GET_GOALS,
+                    userGoals: res.data[0].userGoals,
+                })
+            })     
     }
 
     function calculateSums() {
@@ -79,6 +89,7 @@ const Goals = () => {
 
     useEffect(() => {
         getTransactions();
+        getGoals();
         if (state.userFinancials.length > 0) {
           calculateSums();
         }
