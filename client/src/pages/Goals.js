@@ -4,7 +4,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import API from '../utils/API';
 import { LOGIN, GET_TRANSACTIONS, UPDATE_SUMS, GET_GOALS } from '../utils/actions';
 import GoalsForm from '../components/goals/GoalsForm';
-import { Doughnut } from "react-chartjs-2";
+import { Doughnut, Bar } from "react-chartjs-2";
 import HomeButton from '../components/HomeButton';
 
 const Goals = () => {
@@ -67,7 +67,12 @@ const Goals = () => {
         state.sumTransactions.groceries, 
         state.sumTransactions.utilities,
         state.sumTransactions.mortgageRent
-    ]
+    ];
+
+    let sumExpenditures = 0;
+    dataArr.forEach((item) => {
+        sumExpenditures+= item;
+    })
 
     const data = {
         labels: ["Bars/Restaurants", "Travel", "Groceries", "Utilities", "Mortgage/Rent"],
@@ -86,6 +91,25 @@ const Goals = () => {
           },
         ]
       };
+    
+    const dataArrTwo = [
+        -sumExpenditures ,state.sumTransactions.income
+    ]
+
+    const dataTwo = {
+        labels: ["Expenditures", "Income"],
+        datasets: [
+          {
+            label: "Budget",
+            data: dataArrTwo,
+            fill: true,
+            backgroundColor: [
+                "rgba(255, 0, 0, .8)",
+                "rgba(50, 166, 104, .8)"    
+            ],
+          },
+        ]
+    }
 
     useEffect(() => {
         getTransactions();
@@ -119,8 +143,11 @@ const Goals = () => {
                     <div>
                         <HomeButton />
                         <div className="row">
-                            <div className='col-md-8 offset-md-2'>
+                            <div className='col-md-6'>
                                 <Doughnut data={data} />
+                            </div>
+                            <div className='col-md-6'>
+                                <Bar data={dataTwo} />
                             </div>
                         </div>
                         <GoalsForm />
