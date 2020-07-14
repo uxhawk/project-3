@@ -47,7 +47,7 @@ const Transaction = () => {
                 });
             })
             .catch((err) => console.log(err));
-            console.log(state.userFinancials);
+            // console.log(state.userFinancials);
     }
 
     useEffect(() => {

@@ -65,7 +65,7 @@ const Signup = () => {
                 type: LOGIN,
                 userID: res.data
             });
-            console.log(`User ID: ${res.data}`);
+            // console.log(`User ID: ${res.data}`);
         }).catch(err => {
             console.log(err);
         }).finally(_ => {

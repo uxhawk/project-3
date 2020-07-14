@@ -2,7 +2,7 @@ import React from 'react';
 
 const CurrentSearch = (props) => {
     const handleWatchClick = () => {
-        console.log('hello world');
+        // console.log('hello world');
     }
     
     return (
