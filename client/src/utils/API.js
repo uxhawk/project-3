@@ -45,5 +45,8 @@ export default {
   },
   getAllGoals: function(id) {
     return axios.get('api/goals/' +id);
+  },
+  updateGoals: function(id, goalId) {
+    return axios.put('/api/goals/' +id, goalId);
   }
 };

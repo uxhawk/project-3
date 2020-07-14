@@ -49,5 +49,14 @@ module.exports = {
     .find({_id: req.params.id}, 'userGoals')
     .then((dbModel) => res.json(dbModel))
     .catch((err) => res.status(422).json(err));
+  },
+  updateGoals: function(req, res) {
+    db.User
+    .update({_id: req.params.id},
+      {
+        $set: { userGoals: req.body}
+      })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
   }
 };

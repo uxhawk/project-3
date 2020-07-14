@@ -25,7 +25,8 @@ function GoalsForm() {
     // dispatch({ type: LOADING });
     const currentGoal = {
         title: titleRef.current.value,
-        body: bodyRef.current.value
+        body: bodyRef.current.value,
+        goalId: Math.random(),
     }
     API.saveGoal(state.user, currentGoal)
       .then(() => {
