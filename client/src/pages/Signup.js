@@ -26,6 +26,17 @@ const Signup = () => {
             return alert('Please enter your email and password to sign in.');
         } 
 
+        const regex = RegExp(/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/);
+
+        if (!regex.test(emailRef.current.value)) {
+            emailRef.current.value = '';
+            passwordRef.current.value = '';
+            return alert('Please enter a valid email to sign up.');
+        }
+        
+
+
+
         // if there is data in the fields, run the signupUser function and clear the input fields
         signupUser(emailRef.current.value, passwordRef.current.value);
         emailRef.current.value = '';
@@ -45,12 +56,6 @@ const Signup = () => {
       .catch(err => console.log(err));
   }
 
-//   function redirectAfterSignup() {
-//     if (state.user !== '') {
-//         return <Redirect to="/" />; 
-//     }
-//   }
-
   useEffect(() => {
     if (state.user) {
         setLoading(false);
@@ -68,22 +73,6 @@ const Signup = () => {
         });
     }
 }, []);
-
-//   const getPrices = (symbol) => {
-//     API.getIndexPrices(symbol)
-//     .then((res) => {
-//         dispatch({
-            
-//             type: UPDATE_PRICE,
-//             index: props.id,
-//             currentPrice: res.data.c
-//         });
-//     })
-//     .catch((err) => console.log(err));
-// }
-// useEffect(() => {
-//     getPrices(props.state.symbol);
-// }, []);
 
 if (state.user !== '') {
     return <Redirect to="/dashboard" />; 
