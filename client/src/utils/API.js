@@ -1,5 +1,5 @@
 import axios from "axios";
-
+const { REACT_APP_FINNHUB } = process.env;
 export default {
   get_credentials: () => {
     return axios.get('api/auth/get_credentials');
