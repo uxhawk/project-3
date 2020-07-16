@@ -7,19 +7,21 @@ module.exports = {
     "ecmaVersion": 6,
     "sourceType": "module",
     "ecmaFeatures": {
-        "jsx": true
+        "jsx": true,
+        "modules": true,
+        "experimentalObjectRestSpread": true,
     }
   },
   'extends': [
     'plugin:react/recommended',
     'google',
   ],
-  'parserOptions': {
-    'ecmaFeatures': {
-      'jsx': true,
-    },
-    'sourceType': 'module',
-  },
+  // 'parserOptions': {
+  //   'ecmaFeatures': {
+  //     'jsx': true,
+  //   },
+  //   'sourceType': 'module',
+  // },
   'plugins': [
     'react',
   ],

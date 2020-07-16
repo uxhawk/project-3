@@ -18,7 +18,7 @@ const userSchema = new Schema({
 
 // userSchema.methods.addNewTransaction = function(transaction) {
 //   this.userFinancials.push(transaction);
-  
+
 
 //   return this.userFinancials;
 // };
