@@ -78,7 +78,6 @@ const Dashboard = () => {
           });
         })
         .catch((err) => console.log(err));
-    // console.log(state.userFinancials);
   }
 
   /**
@@ -98,12 +97,12 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    // const script = document.createElement('script');
+    const script = document.createElement('script');
 
-    // script.src = './js/multiple.js';
-    // script.async = true;
+    script.src = './js/multiple.js';
+    script.async = true;
 
-    // document.body.appendChild(script);
+    document.body.appendChild(script);
 
     getTransactions();
     if (state.userFinancials.length > 0) {
