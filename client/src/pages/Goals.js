@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useStoreContext } from '../utils/GlobalState';
 import { Redirect, useHistory } from 'react-router-dom';
 import API from '../utils/API';
-import { LOGIN, GET_TRANSACTIONS, UPDATE_SUMS } from '../utils/actions';
+import { LOGIN, GET_TRANSACTIONS, UPDATE_SUMS, GET_GOALS } from '../utils/actions';
 import GoalsForm from '../components/goals/GoalsForm';
-import { Doughnut } from "react-chartjs-2";
+import { Doughnut, Bar } from "react-chartjs-2";
+import HomeButton from '../components/HomeButton';
 
 const Goals = () => {
     const [loading, setLoading] = useState(true);
@@ -22,8 +23,18 @@ const Goals = () => {
             .catch((err) => console.log(err));
     }
 
+    function getGoals() {
+        API.getAllGoals(state.user)
+            .then((res) => {
+                dispatch({
+                    type: GET_GOALS,
+                    userGoals: res.data[0].userGoals,
+                })
+            })     
+    }
+
     function calculateSums() {
-        const categoriesArr = ['income', 'barRestaurant', 'travel', 'groceries', 'utilities', 'mortgageRent'];
+        const categoriesArr = ['income', 'barsRestaurant', 'travel', 'groceries', 'utilities', 'mortgageRent'];
         const transactionsArr = state.userFinancials;
         let newSumObject =  {
           income: 0,
@@ -50,18 +61,18 @@ const Goals = () => {
         })
     }
 
-    function handleNavClick(event) {
-        const destination = event.target.getAttribute('nav-value');
-        history.push(`/${destination}`);
-    }
-
     const dataArr = [
         state.sumTransactions.barsRestaurant,
         state.sumTransactions.travel,
         state.sumTransactions.groceries, 
         state.sumTransactions.utilities,
         state.sumTransactions.mortgageRent
-    ]
+    ];
+
+    let sumExpenditures = 0;
+    dataArr.forEach((item) => {
+        sumExpenditures+= item;
+    })
 
     const data = {
         labels: ["Bars/Restaurants", "Travel", "Groceries", "Utilities", "Mortgage/Rent"],
@@ -70,13 +81,39 @@ const Goals = () => {
             label: "Budget",
             data: dataArr,
             fill: true,
-            backgroundColor: ["red", "blue", "green", "yellow", "red"]
+            backgroundColor: [
+                "rgba(50, 166, 104, .8)",
+                "rgba(9, 118, 60, .8)",
+                "rgba(50, 115, 149, .8)",
+                "rgba(235, 160, 71, .8)",
+                "rgba(235, 108, 71, .8)",
+            ],
           },
         ]
       };
+    
+    const dataArrTwo = [
+        -sumExpenditures ,state.sumTransactions.income
+    ]
+
+    const dataTwo = {
+        labels: ["Expenditures", "Income"],
+        datasets: [
+          {
+            label: "Budget",
+            data: dataArrTwo,
+            fill: true,
+            backgroundColor: [
+                "rgba(255, 0, 0, .8)",
+                "rgba(50, 166, 104, .8)"    
+            ],
+          },
+        ]
+    }
 
     useEffect(() => {
         getTransactions();
+        getGoals();
         if (state.userFinancials.length > 0) {
           calculateSums();
         }
@@ -88,7 +125,7 @@ const Goals = () => {
                     type: LOGIN,
                     userID: res.data
                 });
-                console.log(`User ID: ${res.data}`);
+                // console.log(`User ID: ${res.data}`);
             }).catch(err => {
                 console.log(err);
             }).finally(_ => {
@@ -104,19 +141,15 @@ const Goals = () => {
                 {
                 state.user ? 
                     <div>
-                        Goals
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
-
+                        <HomeButton />
                         <div className="row">
-                            <div className='col-md-8 offset-md-2'>
+                            <div className='col-md-6'>
                                 <Doughnut data={data} />
                             </div>
+                            <div className='col-md-6'>
+                                <Bar data={dataTwo} />
+                            </div>
                         </div>
-
-                        
                         <GoalsForm />
                     </div>  : 
                     <Redirect to="/login" />

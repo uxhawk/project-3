@@ -26,6 +26,17 @@ const Signup = () => {
             return alert('Please enter your email and password to sign in.');
         } 
 
+        const regex = RegExp(/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/);
+
+        if (!regex.test(emailRef.current.value)) {
+            emailRef.current.value = '';
+            passwordRef.current.value = '';
+            return alert('Please enter a valid email to sign up.');
+        }
+        
+
+
+
         // if there is data in the fields, run the signupUser function and clear the input fields
         signupUser(emailRef.current.value, passwordRef.current.value);
         emailRef.current.value = '';
@@ -45,12 +56,6 @@ const Signup = () => {
       .catch(err => console.log(err));
   }
 
-//   function redirectAfterSignup() {
-//     if (state.user !== '') {
-//         return <Redirect to="/" />; 
-//     }
-//   }
-
   useEffect(() => {
     if (state.user) {
         setLoading(false);
@@ -60,7 +65,7 @@ const Signup = () => {
                 type: LOGIN,
                 userID: res.data
             });
-            console.log(`User ID: ${res.data}`);
+            // console.log(`User ID: ${res.data}`);
         }).catch(err => {
             console.log(err);
         }).finally(_ => {
@@ -68,22 +73,6 @@ const Signup = () => {
         });
     }
 }, []);
-
-//   const getPrices = (symbol) => {
-//     API.getIndexPrices(symbol)
-//     .then((res) => {
-//         dispatch({
-            
-//             type: UPDATE_PRICE,
-//             index: props.id,
-//             currentPrice: res.data.c
-//         });
-//     })
-//     .catch((err) => console.log(err));
-// }
-// useEffect(() => {
-//     getPrices(props.state.symbol);
-// }, []);
 
 if (state.user !== '') {
     return <Redirect to="/dashboard" />; 
@@ -96,20 +85,16 @@ return (
             {
             state.user ? 
             <Redirect to="/dashboard" />  : 
-                        <div className="row text-center">
-                        {/* <h2>Welcome to Tile Master Finances. Sign in to get started.</h2> */}
+                    <div className="row text-center">
                         <div className="col-md-4 offset-md-4 mt-4">
-                        <form className="form-signin" >
-                            <img className="mb-4" src="https://via.placeholder.com/140x100" alt="" width="140" height="100" />
-                            <h1 className="h3 mb-3 font-weight-normal">Create New Account</h1>
-                            <label htmlFor="inputEmail" className="sr-only">Email address</label>
-                            <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required="" autoFocus="" ref={emailRef}/>
-                            <label htmlFor="inputPassword" className="sr-only">Password</label>
-                            <input type="password" id="inputPassword" className="form-control" placeholder="Password" required="" ref={passwordRef}/>
-                            <button className="btn btn-lg btn-primary btn-block mt-4" type="submit" onClick={(event) => {handleSignupBtnClick(event)}}>Create Account</button>
-                            <p className="mt-4 mb-1">Already a member?</p>
-                            <button className="btn btn-lg btn-info btn-block mt-1" type="submit" onClick={(event) => {handleLoginBtnClick(event)}}>Take me to Login</button>
-                        </form>
+                            <form className="form-signin form-signin mt-5 gradient p-5">
+                                <h1 className="h3 mb-3 text-white ">Create New Account</h1>
+                                <input type="text" id="inputEmail" className="form-control mb-3" placeholder="Email address" required="" autoFocus="" ref={emailRef}/>
+                                <input type="password" id="inputPassword" className="form-control" placeholder="Password" required="" ref={passwordRef}/>
+                                <button className="btn btn-raised btn-white btn-block mt-4" type="submit" onClick={(event) => {handleSignupBtnClick(event)}}>Create Account</button>
+                                <p className="mt-4 mb-1 text-white">Already a member?</p>
+                                <button className="btn btn-primary btn-raised btn-block mt-1" type="submit" onClick={(event) => {handleLoginBtnClick(event)}}>Take me to Login</button>
+                            </form>
                         </div>
                     </div>
             }
@@ -120,6 +105,12 @@ return (
 };
 
 export default Signup;
+
+
+
+
+
+
 
 
 

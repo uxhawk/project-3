@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 // const MongoStore = require('connect-mongo')(session);
@@ -23,7 +23,7 @@ app.use(express.json());
 //       store: new MongoStore({mongooseConnection: mongoose.connection}),
 //     }),
 // );
-app.use(session({secret: 'keyboard cat',
+app.use(session({secret: process.env.CLIENT_SEC,
   resave: true, saveUninitialized: true}));
 
 // passport middleware

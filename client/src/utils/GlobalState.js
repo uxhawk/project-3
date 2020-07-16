@@ -1,9 +1,11 @@
-import React, { createContext, useReducer, useContext } from "react";
+import React, {createContext, useReducer, useContext} from 'react';
 import update from 'react-addons-update';
-import { NEW_USER, LOGOUT, LOGIN, ADD_SYMBOLS, UPDATE_PRICE, GET_STOCK_PRICE, ADD_TRANSACTION, GET_TRANSACTIONS, UPDATE_SUMS, ADD_GOALS, GET_GOALS } from "./actions";
+import {NEW_USER, LOGOUT, LOGIN, ADD_SYMBOLS,
+  UPDATE_PRICE, GET_STOCK_PRICE, GET_TRANSACTIONS,
+  UPDATE_SUMS, GET_GOALS} from './actions';
 
 const StoreContext = createContext();
-const { Provider } = StoreContext;
+const {Provider} = StoreContext;
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -17,17 +19,18 @@ const reducer = (state, action) => {
         ...state,
         user: action.userID,
         userFinancials: action.userFinancials,
+        userFinancials: action.userFinancials,
       };
     case LOGIN:
       return {
         ...state,
         user: action.userID,
         userFinancials: action.userFinancials,
-      }
+      };
     case ADD_SYMBOLS:
       return {
         ...state,
-        autoFillSymbols: [...action.symbols, ...state.autoFillSymbols]
+        autoFillSymbols: [...action.symbols, ...state.autoFillSymbols],
       };
     // this really should be update index price
     case UPDATE_PRICE:
@@ -39,11 +42,11 @@ const reducer = (state, action) => {
             },
             currentPrice: {
               $set: action.currentPrice,
-            }
-          }
-        }
-      }); 
-    case GET_STOCK_PRICE: 
+            },
+          },
+        },
+      });
+    case GET_STOCK_PRICE:
       return update(state, {
         currentSearch: {
           name: {
@@ -53,12 +56,12 @@ const reducer = (state, action) => {
             $set: action.price,
           },
           symbol: {
-            $set: action.symbol
+            $set: action.symbol,
           },
           lastUpdate: {
             $set: action.lastUpdate,
           },
-        }
+        },
       });
     case GET_TRANSACTIONS:
       return {
@@ -75,17 +78,18 @@ const reducer = (state, action) => {
     //     ...state,
     //     userGoals: action.goal
     //   }
-    case GET_GOALS: 
-    return {
-      ...state,
-      userGoals: [...action.userGoals],
-    }
+    case GET_GOALS:
+      return {
+        ...state,
+        userGoals: [...action.userGoals],
+      };
     default:
       return state;
   }
 };
 
-const StoreProvider = ({ value = [], ...props }) => {
+// eslint-disable-next-line react/prop-types
+const StoreProvider = ({value = [], ...props}) => {
   const [state, dispatch] = useReducer(reducer, {
     stockMarketIndicies: [
       {
@@ -124,7 +128,7 @@ const StoreProvider = ({ value = [], ...props }) => {
       utilities: 0,
       barsRestaurant: 0,
       travel: 0,
-    }
+    },
   });
 
   return <Provider value={[state, dispatch]} {...props} />;
@@ -134,4 +138,4 @@ const useStoreContext = () => {
   return useContext(StoreContext);
 };
 
-export { StoreProvider, useStoreContext };
+export {StoreProvider, useStoreContext};

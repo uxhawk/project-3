@@ -3,7 +3,7 @@ import { useStoreContext } from '../utils/GlobalState';
 import { Redirect } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import API from '../utils/API';
-import { LOGIN, LOGOUT, GET_TRANSACTIONS, UPDATE_SUMS, GET_GOALS } from '../utils/actions';
+import { LOGIN, LOGOUT, GET_TRANSACTIONS, UPDATE_SUMS } from '../utils/actions';
 import '../App.css';
 
 
@@ -12,8 +12,16 @@ const Dashboard = () => {
   const [state, dispatch] = useStoreContext();
   let history = useHistory();
 
+  const styles = {
+    imgStyle: {
+      margin: "auto",
+      maxWidth: "221px",
+      display: "block",
+    }
+  };
+
   function calculateSums() {
-      const categoriesArr = ['income', 'barRestaurant', 'travel', 'groceries', 'utilities', 'mortgageRent'];
+      const categoriesArr = ['income', 'barsRestaurant', 'travel', 'groceries', 'utilities', 'mortgageRent'];
       const transactionsArr = state.userFinancials;
       let newSumObject =  {
         income: 0,
@@ -39,32 +47,11 @@ const Dashboard = () => {
           sumTransactions: newSumObject,
       })
   }
-  const numGoals = state.userGoals.length;
-  function getGoals() {
-    API.getAllGoals(state.user)
-        .then((res) => {
-            dispatch({
-                type: GET_GOALS,
-                userGoals: res.data[0].userGoals,
-            })
-        })
-    console.log(state.userGoals[0]);
-}
 
   function handleNavClick(event) {
     const destination = event.target.getAttribute('nav-value');
     history.push(`/${destination}`);
   } 
-  
-  function handleSignOut() {
-    API.logout()
-      .then(async () => dispatch({
-        type: LOGOUT,
-        userID: '',
-        userFinancials: [],
-      }))
-      .catch(err => console.log(err));
-  }
 
   function getTransactions() {
     API.getTransactions(state.user)
@@ -75,16 +62,29 @@ const Dashboard = () => {
             });
         })
         .catch((err) => console.log(err));
+        // console.log(state.userFinancials);
 }
-    
+
+function logOut() {
+  API.logout()
+    .then(() => {
+     dispatch({
+       type: LOGOUT,
+       user: ''
+     });
+    })
+    .catch((err) => {console.log(err)})
+}
+
     useEffect(() => {
       const script = document.createElement("script");
+
       script.src = "./js/multiple.js";
       script.async = true;
+  
       document.body.appendChild(script);
       
       getTransactions();
-      getGoals();
       if (state.userFinancials.length > 0) {
         calculateSums();
       }
@@ -96,7 +96,7 @@ const Dashboard = () => {
                   type: LOGIN,
                   userID: res.data
               });
-              console.log(`User ID: ${res.data}`);
+              // console.log(`User ID: ${res.data}`);
           }).catch(err => {
               console.log(err);
           }).finally(_ => {
@@ -112,37 +112,79 @@ const Dashboard = () => {
               {
               state.user ? 
                   <div>
-                      Dashboard
-                      <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
-                        <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
                       <div className="tiles">
-                          <div className="item">{state.sumTransactions.income}</div>
-                          <div className="item">{state.sumTransactions.groceries}</div>
-                            {/* {state.userGoals.length > 0 ? <div className="item">
-                                {state.userGoals[state.userGoals.length -1].title}
-                                Check the status of your {state.userGoals.length} goals
-                                
-                                </div> :
-                            <div className="item">empty</div>
-                            } */}
-                        <div className="item">Check the status of your goals</div>
-                          <div className="item">item 4</div>
-                          <div className="item">item 5</div>
-                          <div className="item">item 6</div>
-                          <div className="item">item 7</div>
-                          <div className="item">item 8</div>
-                          <div className="item">item 9</div>
-                          <div className="item-tall">item 10</div>
-                          <div className="item">item 11</div>
-                          <div className="item">item 12</div>  
+                          <div className="item-income">
+                            <div className="text-center text-white pt-5">
+                              <h2>${state.sumTransactions.income}</h2>
+                              <h4 className="text-uppercase">Total Income</h4>
+                              <ion-icon name="cash-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+                          <div className="item-travel">
+                          <div className="text-center text-white pt-5">
+                              <h2>${state.sumTransactions.travel}</h2>
+                              <h4 className="text-uppercase">Travel Expenses</h4>
+                              <ion-icon name="airplane-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+                          <div className="item-bills">
+                          <div className="text-center text-white pt-5">
+                              <h2>${state.sumTransactions.utilities}</h2>
+                              <h4 className="text-uppercase">Bills & Utilities</h4>
+                              <ion-icon name="construct-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+                          <div className="item-signout">
+                              <div className="row">
+                                  <div className="col-sm-12 text-white">
+                                      <h3 className="text-uppercase text-white" onClick={() => {logOut()}}>Sign Out</h3>
+                                      <ion-icon name="log-out-outline" size="large"></ion-icon>
+                                  </div>
+                              </div> 
+                          </div>
+                          <div className="item-addTransactions">
+                          <div className="text-center text-white pt-5">
+                              <h3 onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</h3>
+                              <ion-icon name="add-circle-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+                          <div className="item-groceries">
+                          <div className="text-center text-white pt-5">
+                              <h2>${state.sumTransactions.groceries}</h2>
+                              <h4 className="text-uppercase">Groceries</h4>
+                              <ion-icon name="cart-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+
+                          <div className="item-goals">
+                            <div className="text-center text-white pt-5">
+                                  <h3 className="text-uppercase" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals & Budget</h3>
+                                  <h4 className="text-uppercase">Check in on the status of your budget and savings goals.</h4>
+                                  <ion-icon name="bar-chart-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+                          <div className="item-goals">
+                            <div className="text-center text-white pt-5">
+                                  <h3 className="text-uppercase" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</h3>
+                                  <h4 className="text-uppercase">Catch a glimpse of Wall St.</h4>
+                                  <ion-icon name="trending-up-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+                          <div className="item-barsAndRestaurants">
+                            <div className="text-center text-white pt-5">
+                                <h2>${state.sumTransactions.barsRestaurant}</h2>
+                                <h4 className="text-uppercase">Bars & Restaurants</h4>
+                                <ion-icon name="beer-outline" size="large"></ion-icon>
+                            </div>
+                          </div>
+                          <div className="item-rent">
+                          <div className="text-center text-white pt-5">
+                              <h2>${state.sumTransactions.mortgageRent}</h2>
+                              <h4 className="text-uppercase">Mortgage & Rent</h4>
+                              <ion-icon name="home-outline" size="large"></ion-icon>
+                            </div>
+                            </div> 
                       </div>
-                      {/* <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
-                      <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
-                      <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
-                      <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button>
-                      <button className="btn btn-info" onClick={() => {handleSignOut()}} nav-value="dashboard">Sign Out</button> */}
                   </div>  : 
                   <Redirect to="/login" />
               }

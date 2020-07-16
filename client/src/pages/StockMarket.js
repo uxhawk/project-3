@@ -5,16 +5,12 @@ import API from '../utils/API';
 import { LOGIN } from '../utils/actions';
 import MarketOverview from '../components/StockMarket/MarketOverview';
 import Search from '../components/StockMarket/Search';
+import HomeButton from '../components/HomeButton';
 
 const StockMarket = () => {
     const [loading, setLoading] = useState(true);
     const [state, dispatch] = useStoreContext();
     let history = useHistory();
-
-    // function handleNavClick(event) {
-    //     const destination = event.target.getAttribute('nav-value');
-    //     history.push(`/${destination}`);
-    // }
 
     useEffect(() => {
         if (state.user) {
@@ -25,7 +21,7 @@ const StockMarket = () => {
                     type: LOGIN,
                     userID: res.data
                 });
-                console.log(`User ID: ${res.data}`);
+                // console.log(`User ID: ${res.data}`);
             }).catch(err => {
                 console.log(err);
             }).finally(_ => {
@@ -41,7 +37,7 @@ const StockMarket = () => {
                 {
                 state.user ? 
                     <div>
-                        Stock market
+                        <HomeButton />
                         <MarketOverview />
                         <Search />
                     </div>  : 
@@ -56,7 +52,4 @@ const StockMarket = () => {
 export default StockMarket;
 
 
-{/* <button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="stock-market">Stock Market</button>
-<button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="goals">Goals</button>
-<button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="transaction">Add Transactions</button>
-<button className="btn btn-info" onClick={(event) => {handleNavClick(event)}} nav-value="dashboard">Dashboard</button> */}
+

@@ -2,8 +2,6 @@
 const router = require('express').Router();
 const userFinancials = require('../../controllers/userFinancialController');
 const passport = require('passport');
-// const LocalStrategy = require('passport-local').Strategy;
-
 
 router.get('/get_credentials', (req, res) => {
   if (req.user) {

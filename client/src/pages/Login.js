@@ -53,7 +53,7 @@ const Login = () => {
                         type: LOGIN,
                         userID: res.data
                     });
-                    console.log(`User ID: ${res.data}`);
+                    // console.log(`User ID: ${res.data}`);
                 }).catch(err => {
                     console.log(err);
                 }).finally(_ => {
@@ -71,21 +71,18 @@ return (
             state.user ? 
             <Redirect to="/dashboard" />  : 
                         <div className="row text-center">
-                        {/* <h2>Welcome to Tile Master Finances. Sign in to get started.</h2> */}
-                        <div className="col-md-4 offset-md-4 mt-4">
-                            <form className="form-signin" >
-                                    <img className="mb-4" src="https://via.placeholder.com/140x100" alt="" width="140" height="100" />
-                                    <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-                                    <label htmlFor="inputEmail" className="sr-only">Email address</label>
-                                    <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required="" autoFocus="" ref={emailRef}/>
-                                    <label htmlFor="inputPassword" className="sr-only">Password</label>
-                                    <input type="password" id="inputPassword" className="form-control" placeholder="Password" required="" ref={passwordRef}/>
-                                    <button className="btn btn-lg btn-primary btn-block mt-4" type="submit" onClick={(event) => {handleLoginBtnClick(event)}}>Sign in</button>
-                                    <p className="mt-4 mb-1">Don't have an account yet?</p>
-                                    <button className="btn btn-lg btn-info btn-block mt-1" type="submit" onClick={(event) => {handleSignupBtnClick(event)}}>Take me to Sign Up</button>
-                            </form>
+                            <div className="col-md-4 offset-md-4 mt-4">
+                                <form className="form-signin mt-5 gradient p-5" >
+                                        <h1 className="h3 mb-3 text-white ">Please sign in</h1>
+                                        <input type="text" id="inputEmail" className="form-control mb-3" placeholder="Email address" required="" autoFocus="" ref={emailRef}/>
+                                        <label htmlFor="inputPassword" className="sr-only">Password</label>
+                                        <input type="password" id="inputPassword" className="form-control" placeholder="Password" required="" ref={passwordRef}/>
+                                        <button className="btn btn-raised btn-white btn-block mt-4" type="submit" onClick={(event) => {handleLoginBtnClick(event)}}>Sign in</button>
+                                        <p className="mt-4 mb-1 text-white">Don't have an account yet?</p>
+                                        <button className="btn btn-primary btn-raised btn-block mt-1" onClick={(event) => {handleSignupBtnClick(event)}}>Take me to Sign Up</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
             }
         </div>
         }

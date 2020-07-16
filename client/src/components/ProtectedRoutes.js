@@ -21,7 +21,6 @@ const ProtectedRoutes = () => {
     // }
 
     if (state.user.length === 0) {
-        console.log('hellow');
         return <Redirect to="/login" />;
       }
 
