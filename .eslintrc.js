@@ -1,8 +1,14 @@
 module.exports = {
   'env': {
     'browser': true,
-    'es2020': true,
     'node': true,
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true
+    }
   },
   'extends': [
     'plugin:react/recommended',
@@ -12,7 +18,6 @@ module.exports = {
     'ecmaFeatures': {
       'jsx': true,
     },
-    'ecmaVersion': 11,
     'sourceType': 'module',
   },
   'plugins': [
@@ -20,4 +25,9 @@ module.exports = {
   ],
   'rules': {
   },
+  "settings": {
+    "react": {
+      "version": "detect",
+    }
+  }
 };
