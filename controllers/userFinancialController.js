@@ -18,45 +18,45 @@ module.exports = {
   },
   addTransaction: function(req, res) {
     db.User
-      .update(
-        { _id: req.params.id },
-        {
-          $push: {userFinancials: req.body}
-        }
-      )
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+        .update(
+            {_id: req.params.id},
+            {
+              $push: {userFinancials: req.body},
+            }
+        )
+        .then((dbModel) => res.json(dbModel))
+        .catch((err) => res.status(422).json(err));
   },
   getAllTransactions: function(req, res) {
     db.User
-      .find({_id: req.params.id}, 'userFinancials')
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+        .find({_id: req.params.id}, 'userFinancials')
+        .then((dbModel) => res.json(dbModel))
+        .catch((err) => res.status(422).json(err));
   },
   saveNewGoal: function(req, res) {
     db.User
-      .update(
-        {_id: req.params.id},
-        {
-          $push: { userGoals: req.body}
-        }
-      )
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+        .update(
+            {_id: req.params.id},
+            {
+              $push: {userGoals: req.body},
+            }
+        )
+        .then((dbModel) => res.json(dbModel))
+        .catch((err) => res.status(422).json(err));
   },
-  getAllGoals: function (req, res) {
+  getAllGoals: function(req, res) {
     db.User
-    .find({_id: req.params.id}, 'userGoals')
-    .then((dbModel) => res.json(dbModel))
-    .catch((err) => res.status(422).json(err));
+        .find({_id: req.params.id}, 'userGoals')
+        .then((dbModel) => res.json(dbModel))
+        .catch((err) => res.status(422).json(err));
   },
   updateGoals: function(req, res) {
     db.User
-    .update({_id: req.params.id},
-      {
-        $set: { userGoals: req.body}
-      })
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
-  }
+        .update({_id: req.params.id},
+            {
+              $set: {userGoals: req.body},
+            })
+        .then((dbModel) => res.json(dbModel))
+        .catch((err) => res.status(422).json(err));
+  },
 };

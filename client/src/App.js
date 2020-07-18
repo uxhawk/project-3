@@ -8,14 +8,12 @@ import StockMarket from './pages/StockMarket';
 import Goals from './pages/Goals';
 import Transaction from './pages/Transaction';
 import './App.css';
-const REACT_APP_FINNHUB_APY = process.env.REACT_APP_FINNHUB_API;
 
 /**
  * this is the base of the react app
  * @return {number} The sum of the two numbers.
  */
 function App() {
-  console.log(REACT_APP_FINNHUB_APY);
   return (
     <Router>
       <div>

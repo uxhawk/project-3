@@ -32,7 +32,6 @@ const reducer = (state, action) => {
         ...state,
         autoFillSymbols: [...action.symbols, ...state.autoFillSymbols],
       };
-    // this really should be update index price
     case UPDATE_PRICE:
       return update(state, {
         stockMarketIndicies: {

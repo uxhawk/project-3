@@ -1,6 +1,6 @@
 /* eslint-disable new-cap */
 const router = require('express').Router();
-const userFinancials = require('../../controllers/userFinancialController');
+// const userFinancials = require('../../controllers/userFinancialController');
 const passport = require('passport');
 
 router.get('/get_credentials', (req, res) => {
@@ -26,8 +26,8 @@ router.post('/register_login', (req, res, next) => {
       }
       const userDetails = {
         _id: user._id,
-        userFinancials: user.userFinancials
-      }
+        userFinancials: user.userFinancials,
+      };
       return res.status(200).json(userDetails);
     });
   })(req, res, next);

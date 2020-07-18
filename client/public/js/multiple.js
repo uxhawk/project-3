@@ -1,11 +1,12 @@
+/* eslint-disable */
 /*! Multiple.js - v0.0.1 - 2016-04-09
 * http://NeXTs.github.com/Multiple.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
-var multiple = new Multiple({
-  selector: '.item',
-  background: 'linear-gradient(#273463, #8B4256)',
-  opacity: .9
-});
+// var multiple = new Multiple({
+//   selector: '.item',
+//   background: 'linear-gradient(#273463, #8B4256)',
+//   opacity: .9
+// });
 
 var multipleFood = new Multiple({
   selector: '.item-tall',

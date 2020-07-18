@@ -1,23 +1,35 @@
 module.exports = {
   'env': {
     'browser': true,
-    'es2020': true,
     'node': true,
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true,
+        "modules": true,
+        "experimentalObjectRestSpread": true,
+    }
   },
   'extends': [
     'plugin:react/recommended',
     'google',
   ],
-  'parserOptions': {
-    'ecmaFeatures': {
-      'jsx': true,
-    },
-    'ecmaVersion': 11,
-    'sourceType': 'module',
-  },
+  // 'parserOptions': {
+  //   'ecmaFeatures': {
+  //     'jsx': true,
+  //   },
+  //   'sourceType': 'module',
+  // },
   'plugins': [
     'react',
   ],
   'rules': {
   },
+  "settings": {
+    "react": {
+      "version": "detect",
+    }
+  }
 };
